@@ -12,22 +12,22 @@ const Header = async () => {
   const { isAuthenticated, getUser } = getKindeServerSession();
   const user = await getUser();
 
-  if (user) {
-    const dbUser = await prisma.user.findUnique({
+  if (user && user.email) {
+    await prisma.user.upsert({
       where: {
+        email: user.email,
+      },
+      update: {
+        firstName: user.given_name,
+        lastName: user.family_name,
+      },
+      create: {
         id: user.id,
+        email: user.email,
+        firstName: user.given_name,
+        lastName: user.family_name,
       },
     });
-    if (!dbUser) {
-      await prisma.user.create({
-        data: {
-          id: user.id,
-          email: user.email,
-          firstName: user.given_name,
-          lastName: user.family_name,
-        },
-      });
-    }
   }
   return (
     <div>
