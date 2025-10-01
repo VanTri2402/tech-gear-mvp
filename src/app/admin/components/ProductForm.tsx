@@ -19,7 +19,7 @@ export function ProductForm({
   initialData,
 }: {
   categories: any[];
-  initialData: any[];
+  initialData?: any;
 }) {
   const [open, setOpen] = React.useState(false);
   const router = useRouter();

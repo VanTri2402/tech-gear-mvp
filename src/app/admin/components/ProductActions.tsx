@@ -26,12 +26,12 @@ export function ProductActions({ product, categories }: ProductActionsProps) {
   const router = useRouter();
   async function deleteProduct() {
     const res = await fetch(
-      `${process.env.KINDE_SITE_URL}/api/products/${product.id}`,
+      `/api/products/${product.id}`,
       {
         method: "DELETE",
       }
     );
-    if (!res.ok) {
+    if (res.ok) {
       router.refresh();
     } else {
       alert("Failed to delete the product");

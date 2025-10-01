@@ -37,8 +37,7 @@ const AdminPage = async () => {
         <h1 className="text-2xl font-bold text-shadow-accent text-gray-800">
           Products Management
         </h1>
-        <ProductForm categories={categories} initialData={[]} />
-        <ProductForm categories={categories} initialData={[]} />
+        <ProductForm categories={categories}  />
       </div>
       <div className="mt-6">
         <Table>
