@@ -2,7 +2,7 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import { checkAdminAuth } from "@/lib/admin-auth";
-export async function UPDATE(
+export async function PATCH(
   request: Request,
   { params }: { params: { productId: string } }
 ) {

@@ -7,7 +7,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { CreateProductForm } from "./components/CreateProductForm";
+import { ProductForm } from "./components/ProductForm";
+import { ProductActions } from "./components/ProductActions";
 
 async function getProducts() {
   const res = await fetch(`${process.env.KINDE_SITE_URL}/api/products`, {
@@ -36,7 +37,8 @@ const AdminPage = async () => {
         <h1 className="text-2xl font-bold text-shadow-accent text-gray-800">
           Products Management
         </h1>
-        <CreateProductForm categories={categories} />
+        <ProductForm categories={categories} initialData={[]} />
+        <ProductForm categories={categories} initialData={[]} />
       </div>
       <div className="mt-6">
         <Table>
@@ -55,14 +57,9 @@ const AdminPage = async () => {
                 <TableCell>
                   ${product.price.toLocaleString("en-US")} $
                 </TableCell>
-                <TableCell>{product.category}</TableCell>
+                <TableCell>{product.category.name}</TableCell>
                 <TableCell className="text-right">
-                  <Button variant="outline" size="sm" className="mr-2">
-                    Edit
-                  </Button>
-                  <Button variant="destructive" size="sm">
-                    Delete
-                  </Button>
+                  <ProductActions product={product} categories={categories} />
                 </TableCell>
               </TableRow>
             ))}
