@@ -1,64 +1,62 @@
-import {
-  getKindeServerSession,
-  LoginLink,
-  LogoutLink,
-  RegisterLink,
-} from "@kinde-oss/kinde-auth-nextjs/server";
+// src/components/Header.tsx
+import { getKindeServerSession, LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs/server";
 import Link from "next/link";
-import React from "react";
 import { Button } from "./ui/button";
 import prisma from "@/lib/db";
-const Header = async () => {
-  const { isAuthenticated, getUser } = getKindeServerSession();
-  const user = await getUser();
+import { UserProfile } from "./UserProfile";
+import { NavigationMenu } from "./NavigationMenu";
 
-  if (user && user.email) {
-    await prisma.user.upsert({
-      where: {
-        email: user.email,
-      },
-      update: {
-        firstName: user.given_name,
-        lastName: user.family_name,
-      },
-      create: {
-        id: user.id,
-        email: user.email,
-        firstName: user.given_name,
-        lastName: user.family_name,
-      },
+// Hàm helper để lấy dữ liệu người dùng tổng hợp
+const getCombinedUserData = async () => {
+    const { getUser } = getKindeServerSession();
+    const user = await getUser();
+
+    if (!user) return null;
+
+    const dbUser = await prisma.user.findUnique({
+        where: { id: user.id },
     });
-  }
-  return (
-    <div>
-      <header className="bg-white shadow-sm">
-        <nav className="container mx-auto px-4 py-3 flex justify-between items-center">
-          <Link href={"/"} className="text-xl font-bold ">
-            TechGear<span className="text-blue-500">Alden</span>
-          </Link>
-          <div className="flex items-center gap-4">
-            {!(await isAuthenticated()) ? (
-              <>
-                <LoginLink>
-                  <Button variant="secondary">Login</Button>
-                </LoginLink>
-                <RegisterLink>
-                  <Button>Register</Button>
-                </RegisterLink>
-              </>
-            ) : (
-              <div className="flex items-center gap-4">
-                <p>Hello, {user?.given_name}</p>
-                <LogoutLink>
-                  <Button variant="secondary">Logout</Button>
-                </LogoutLink>
-              </div>
-            )}
-          </div>
-        </nav>
-      </header>
-    </div>
-  );
+
+    // Kết hợp dữ liệu từ Kinde và từ DB
+    return {
+        ...user, // id, email, given_name, family_name, picture từ Kinde
+        role: dbUser?.role, // role từ DB
+    };
+};
+
+const Header = async () => {
+    const { isAuthenticated } = getKindeServerSession();
+    const userData = await getCombinedUserData();
+
+    // Logic upsert có thể giữ nguyên nếu bạn muốn
+    // ...
+
+    return (
+        <header className="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b">
+            <nav className="container mx-auto px-6 h-20 flex items-center justify-between">
+                <div className="flex-1 flex justify-start">
+                    <Link href="/" className="text-xl font-bold tracking-tight">
+                        TechMvp<span className="text-blue-600">Alden</span>
+                    </Link>
+                </div>
+                <div className="flex-1 flex justify-center">
+                    {userData?.role === "ADMIN" && <NavigationMenu />}
+                </div>
+                <div className="flex-1 flex justify-end">
+                    <div className="flex items-center gap-4">
+                        {!(await isAuthenticated()) || !userData ? (
+                            <>
+                                <LoginLink><Button variant="ghost">Log In</Button></LoginLink>
+                                <RegisterLink><Button>Sign Up</Button></RegisterLink>
+                            </>
+                        ) : (
+                            <UserProfile user={userData} />
+                        )}
+                    </div>
+                </div>
+            </nav>
+        </header>
+    );
 };
 
 export default Header;

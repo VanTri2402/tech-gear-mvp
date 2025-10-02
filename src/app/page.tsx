@@ -1,9 +1,8 @@
 // src/app/page.tsx
-import prisma from "@/lib/db";
 import { Button } from "@/components/ui/button";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import Image from "next/image";
 import Link from "next/link";
+import { getUserRole } from "@/lib/admin-auth";
 
 // --- Tách hàm lấy dữ liệu ra riêng ---
 async function getProducts() {
@@ -14,21 +13,6 @@ async function getProducts() {
   return res.json();
 }
 
-async function getUserRole() {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
-
-  if (!user) {
-    return null; // Trả về null nếu người dùng chưa đăng nhập
-  }
-  
-  const dbUser = await prisma.user.findUnique({
-    where: { id: user.id },
-    select: { role: true },
-  });
-
-  return dbUser?.role; // Sẽ là 'ADMIN', 'USER', hoặc undefined
-}
 
 
 // --- Component chính ---

@@ -18,3 +18,19 @@ export const checkAdminAuth = async () => {
 
   return dbUser; 
 };
+
+export async function getUserRole() {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
+  if (!user) {
+    return null; // Trả về null nếu người dùng chưa đăng nhập
+  }
+  
+  const dbUser = await prisma.user.findUnique({
+    where: { id: user.id },
+    select: { role: true },
+  });
+
+  return dbUser?.role; // Sẽ là 'ADMIN', 'USER', hoặc undefined
+}
