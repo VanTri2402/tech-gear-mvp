@@ -135,8 +135,7 @@ export function ProductForm({
               name="categoryId"
               // Thêm một vài class của shadcn/ui/Tailwind để trông giống Input
               className="col-span-3 h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm"
-              required
-              defaultValue={initialData?.categoryId ?? ""}
+              defaultValue={initialData?.categoryId ?? "smartphones"}
             >
               <option value="" disabled>
                 -- Chọn danh mục --
