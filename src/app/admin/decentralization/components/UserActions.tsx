@@ -1,3 +1,4 @@
+'use client'
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
@@ -31,6 +32,7 @@ return (
       onClick={handleUpdateRole} 
       disabled={isAdmin || isLoading} // Disable nếu đã là ADMIN hoặc đang loading
       size="sm"
+      className="text-left"
     >
       {isLoading ? "Updating..." : (isAdmin ? "Already Admin" : "Promote to Admin")}
     </Button>

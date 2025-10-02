@@ -7,33 +7,33 @@ export default async function middleware(req: NextRequest) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
-  // 1. Nếu chưa đăng nhập, chuyển hướng đến trang login của Kinde
   if (!user) {
-    // Dùng NextResponse để tự tạo URL đăng nhập
+    // ... logic đăng nhập
     const loginUrl = new URL("/api/auth/login", req.url);
     loginUrl.searchParams.set("post_login_redirect_url", req.url);
     return NextResponse.redirect(loginUrl);
   }
 
-  // 2. Nếu đã đăng nhập, kiểm tra vai trò trong database
   try {
     const dbUser = await prisma.user.findUnique({
       where: { id: user.id },
       select: { role: true },
     });
 
-    // 3. Nếu không phải ADMIN, chuyển hướng về trang chủ
+    // --- THÊM DÒNG DEBUG Ở ĐÂY ---
+    console.log(`[MIDDLEWARE DEBUG] User ID: ${user.id}, Role in DB: ${dbUser?.role}`);
+    // ----------------------------
+
     if (dbUser?.role !== "ADMIN") {
+      console.log("[MIDDLEWARE ACTION] Redirecting to home page because role is not ADMIN.");
       const homeURL = new URL("/", req.url);
       return NextResponse.redirect(homeURL);
     }
   } catch (error) {
-    console.error("Middleware database error:", error);
-    const homeURL = new URL("/", req.url);
-    return NextResponse.redirect(homeURL);
+    // ...
   }
   
-  // 4. Nếu là ADMIN, cho phép request đi tiếp
+  console.log("[MIDDLEWARE ACTION] Allowing access to /admin.");
   return NextResponse.next();
 }
 

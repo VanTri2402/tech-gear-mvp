@@ -1,60 +1,40 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Cấu hình client để có thể query từ code JS/TS
 generator client {
   provider = "prisma-client-js"
 }
 
-// Cấu hình kết nối database
 datasource db {
-  provider = "postgresql" // Sử dụng PostgreSQL
-  url      = env("DATABASE_URL") // Lấy chuỗi kết nối từ file .env
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
-// Model User: Lưu thông tin người dùng
-// Sẽ được tạo khi người dùng đăng ký qua Kinde lần đầu tiên
 model User {
-  id        String    @id @unique // Lấy ID từ Kinde để làm khóa chính
+  id        String    @id @unique
   email     String    @unique
-  firstName String?   // Dữ liệu tùy chọn, có thể null
+  firstName String?
   lastName  String?
-  role      Role      @default(USER) // Vai trò mặc định là USER
-
-  // Định nghĩa mối quan hệ nhiều-nhiều với Product
-  // Đây là danh sách sản phẩm người dùng đã "thích"
-  wishlist  Product[]
+  role      Role      @default(USER)
+  wishlist  Product[] @relation("ProductToUser")
 }
 
-// Model Product: Lưu thông tin sản phẩm
 model Product {
-  id          String   @id @default(cuid()) // Tự động tạo ID duy nhất
+  id          String   @id @default(cuid())
   name        String
-  description String   @db.Text // Sử dụng kiểu Text để có thể viết mô tả dài
+  description String
   price       Float
   imageUrl    String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-
-  // Khóa ngoại để kết nối tới Category
-  categoryId String
-  // Định nghĩa mối quan hệ một-nhiều: Một Product thuộc về một Category
-  category   Category @relation(fields: [categoryId], references: [id])
-
-  // Phía đối diện của mối quan hệ nhiều-nhiều với User
-  favoritedBy User[]
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id])
+  favoritedBy User[]   @relation("ProductToUser")
 }
 
-// Model Category: Lưu thông tin danh mục sản phẩm
 model Category {
-  id   String @id @default(cuid())
-  name String @unique
-
-  // Định nghĩa mối quan hệ một-nhiều: Một Category có nhiều Product
+  id       String    @id @default(cuid())
+  name     String    @unique
   products Product[]
 }
 
-// Enum: Định nghĩa các vai trò cố định trong hệ thống
 enum Role {
   USER
   ADMIN

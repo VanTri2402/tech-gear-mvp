@@ -1,12 +1,25 @@
-// src/app/admin/decentralization/page.tsx (tên file gợi ý)
+// src/app/admin/decentralization/page.tsx
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { UserActions } from "./components/UserActions"; // Import component mới
+import { UserActions } from "./components/UserActions";
+import { headers } from "next/headers"; // <-- BƯỚC 1: Import headers
 
-// Hàm lấy dữ liệu người dùng (giữ nguyên, chỉ cần sửa URL)
 async function getUsers() {
-    const baseUrl = process.env.KINDE_SITE_URL; // Dùng KINDE_SITE_URL vì đây là Server Component
-    const res = await fetch(`${baseUrl}/api/users`, { cache: "no-store" });
+    // BƯỚC 2: Lấy headers từ request gốc
+    const headerList = headers();
+    const cookie = (await headerList).get("cookie"); // Trích xuất cookie
+
+    const res = await fetch(`${process.env.KINDE_SITE_URL}/api/users`, { 
+      cache: "no-store",
+      headers: {
+        // BƯỚC 3: Gửi cookie kèm theo request fetch
+        Cookie: cookie || "",
+      }
+    });
+
     if (!res.ok) {
+    //   // Log thêm để dễ debug
+    //   const errorBody = await res.text();
+    //   console.error(`API returned ${res.status}: ${errorBody}`);
       throw new Error("Failed to fetch users");
     }
     return res.json();
@@ -14,11 +27,9 @@ async function getUsers() {
 
 const DecentralizationPage = async () => {
     const users = await getUsers();
-
     return (
         <div className="container mx-auto py-8 px-4">
             <h1 className="text-2xl font-bold text-gray-800 mb-6">User Management</h1>
-
             <div className="border rounded-lg">
                 <Table>
                     <TableHeader>
@@ -44,7 +55,6 @@ const DecentralizationPage = async () => {
                                     </span>
                                 </TableCell>
                                 <TableCell className="text-right">
-                                    {/* Sử dụng Client Component ở đây */}
                                     <UserActions user={user} />
                                 </TableCell>
                             </TableRow>

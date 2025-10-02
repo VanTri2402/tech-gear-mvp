@@ -1,8 +1,14 @@
 import { checkAdminAuth } from "@/lib/admin-auth";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db";
-export async function PATCH({params} : {params : {userId: string}}) {
+
+export async function PATCH(request : NextRequest,{params} : {params : {userId: string}}) {
     try {
+          const adminUser = await checkAdminAuth();
+
+    if (adminUser.id === params.userId) {
+        return new NextResponse("Admins cannot change their own role", { status: 400 });
+    }
         const dbUser = await prisma?.user.findUnique({
             where: { id: params.userId },
         })
