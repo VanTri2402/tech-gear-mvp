@@ -1,24 +1,28 @@
 // src/middleware.ts
-import { withAuth } from "@kinde-oss/kinde-auth-nextjs/middleware";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
-import prisma from "./lib/db"; // Đảm bảo đường dẫn này đúng
+import prisma from "./lib/db";
 
 export default async function middleware(req: NextRequest) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
- 
+  // 1. Nếu chưa đăng nhập, chuyển hướng đến trang login của Kinde
   if (!user) {
-    return withAuth(req);
+    // Dùng NextResponse để tự tạo URL đăng nhập
+    const loginUrl = new URL("/api/auth/login", req.url);
+    loginUrl.searchParams.set("post_login_redirect_url", req.url);
+    return NextResponse.redirect(loginUrl);
   }
 
+  // 2. Nếu đã đăng nhập, kiểm tra vai trò trong database
   try {
     const dbUser = await prisma.user.findUnique({
       where: { id: user.id },
-      select: { role: true }, 
+      select: { role: true },
     });
 
+    // 3. Nếu không phải ADMIN, chuyển hướng về trang chủ
     if (dbUser?.role !== "ADMIN") {
       const homeURL = new URL("/", req.url);
       return NextResponse.redirect(homeURL);
@@ -28,8 +32,9 @@ export default async function middleware(req: NextRequest) {
     const homeURL = new URL("/", req.url);
     return NextResponse.redirect(homeURL);
   }
-
-  return withAuth(req);
+  
+  // 4. Nếu là ADMIN, cho phép request đi tiếp
+  return NextResponse.next();
 }
 
 export const config = {

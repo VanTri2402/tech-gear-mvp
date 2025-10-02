@@ -74,7 +74,7 @@ export default async function HomePage() {
               </div>
             </Link>
             <div className="mt-auto p-4 pt-0">
-                {/* Ở đây bạn có thể thêm nút Wishlist và kiểm tra userRole */}
+               
                 <Button variant="outline" className="w-full">
                     Add to Cart
                 </Button>
