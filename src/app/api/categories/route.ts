@@ -3,10 +3,21 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { NextResponse } from "next/server";
 export async function GET() {
   try {
-    const categories = await prisma.category.findMany();
+    const categories = await prisma.category.findMany({  include: {
+        _count: {
+          select: { products: true },
+        },
+      },
+      orderBy: {
+        name: 'asc'
+      }});
     return new Response(JSON.stringify(categories));
-  } catch (error) {
-    return new NextResponse("Something went wrong", { status: 500 });
+  } catch (error : any) {
+    if (error.message === "Unauthorized" || error.message === "Forbidden") {
+      return new NextResponse(error.message, { status: error.message === "Unauthorized" ? 401 : 403 });
+    }
+    console.error("Error fetching categories:", error);
+    return new NextResponse("Internal Server Error", { status: 500 });
   }
 }
 

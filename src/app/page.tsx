@@ -13,8 +13,6 @@ async function getProducts() {
   return res.json();
 }
 
-
-
 // --- Component chính ---
 export default async function HomePage() {
   // Gọi các hàm lấy dữ liệu song song để tối ưu tốc độ tải trang
