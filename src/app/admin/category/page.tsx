@@ -1,8 +1,9 @@
 // src/app/admin/categories/page.tsx
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import React from 'react';
-import CategoryActions from './components/CategoryActions'; // Giả sử đường dẫn đúng
+import CategoryActions from './CategoryActions';
 import { headers } from 'next/headers'; // Import headers
+import { CreateCategoryDialog } from './CreateCategory';
 
 async function fetchCategories() {
   const headerList = headers();
@@ -22,10 +23,11 @@ const CategoryPage = async () => {
   const categories = await fetchCategories();
 
   return (
-    <div className="container mx-auto py-10">
-      <h1 className="text-2xl font-bold mb-6">Categories Management</h1>
-      {/* Bạn có thể thêm nút "Add New Category" ở đây */}
-
+    <div className="container mx-auto py-10 ">
+        <div className="flex justify-between items-center mb-6">
+                <h1 className="text-2xl font-bold">Categories Management</h1>
+                <CreateCategoryDialog /> {/* <-- Sử dụng ở đây */}
+            </div>
       <div className="border rounded-lg">
         <Table>
           <TableHeader>

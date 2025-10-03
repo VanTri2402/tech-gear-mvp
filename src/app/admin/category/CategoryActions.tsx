@@ -48,9 +48,10 @@ export default function CategoryActions({ category }: { category: { id: string; 
       router.refresh();
     } catch (error: any) {
       console.error(error);
-      alert(error.message);
+      alert(error.message)
     } finally {
       setLoading(false);
+      return
     }
   };
 
@@ -86,7 +87,7 @@ export default function CategoryActions({ category }: { category: { id: string; 
       {/* === HÀNH ĐỘNG 1: UPDATE (SỬA) SỬ DỤNG DIALOG === */}
       <Dialog open={openUpdateDialog} onOpenChange={setOpenUpdateDialog}>
         <DialogTrigger asChild>
-          <Button variant="outline" size="sm">Edit</Button>
+          <Button variant="ghost" size="sm">Edit</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <form onSubmit={handleUpdate}>

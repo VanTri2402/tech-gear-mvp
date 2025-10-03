@@ -36,7 +36,7 @@ const Header = async () => {
             <nav className="container mx-auto px-6 h-20 flex items-center justify-between">
                 <div className="flex-1 flex justify-start">
                     <Link href="/" className="text-xl font-bold tracking-tight">
-                        TechMvp<span className="text-blue-600">Alden</span>
+                        TechGear<span className="text-blue-600">Alden</span>
                     </Link>
                 </div>
                 <div className="flex-1 flex justify-center">

@@ -38,7 +38,7 @@ export function UserProfile({ user }: UserProfileProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-15 w-50 rounded-md flex items-center justify-center overflow-hidden">
+        <Button variant="ghost" className="relative h-15 w-50 cursor-pointer rounded-md flex items-center justify-center overflow-hidden">
          
           <Avatar className="h-10 w-10">
             <AvatarImage src={user.picture ?? ""} alt={user.given_name ?? ""} />

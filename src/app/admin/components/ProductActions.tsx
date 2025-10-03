@@ -32,9 +32,9 @@ export function ProductActions({ product, categories }: ProductActionsProps) {
       }
     );
     if (res.ok) {
-      router.refresh();
+      return router.refresh();
     } else {
-      alert("Failed to delete the product");
+     return alert("Failed to delete the product");
     }
   }
   return (
@@ -57,8 +57,8 @@ export function ProductActions({ product, categories }: ProductActionsProps) {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={deleteProduct}>
-              Delete
+            <AlertDialogAction onClick={deleteProduct} asChild>
+              <Button variant={'destructive'}>DELETE</Button>
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

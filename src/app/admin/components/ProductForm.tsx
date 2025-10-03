@@ -13,6 +13,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useRouter } from "next/navigation";
+import { InputTemplate } from "@/components/InputTemplate";
 
 export function ProductForm({
   categories,
@@ -46,41 +47,14 @@ export function ProductForm({
 
     if (response.ok) {
       setOpen(false);
-      router.refresh();
+     router.refresh();
+     return;
     } else {
       alert(`Failed to ${isEditMode ? "update" : "create"} product`);
+      return;
     }
   }
 
-  const InputTemplate = ({
-    label,
-    name,
-    type = "text",
-    required = true,
-    defaultValue = "",
-  }: {
-    label: string;
-    name: string;
-    type?: string;
-    required?: boolean;
-    defaultValue: string;
-  }) => {
-    return (
-      <div className="grid grid-cols-4 items-center gap-4 ">
-        <Label htmlFor={name} className="text-right">
-          {label}
-        </Label>
-        <Input
-          id={name}
-          name={name}
-          type={type}
-          className="col-span-3"
-          required={required}
-          defaultValue={defaultValue}
-        />
-      </div>
-    );
-  };
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>

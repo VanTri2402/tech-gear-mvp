@@ -1,10 +1,9 @@
 // src/app/page.tsx
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import Link from "next/link";
 import { getUserRole } from "@/lib/admin-auth";
 
-// --- Tách hàm lấy dữ liệu ra riêng ---
+// --- Hàm lấy dữ liệu (giữ nguyên) ---
 async function getProducts() {
   const res = await fetch(`${process.env.KINDE_SITE_URL}/api/products`, {
     cache: "no-store",
@@ -15,54 +14,67 @@ async function getProducts() {
 
 // --- Component chính ---
 export default async function HomePage() {
-  // Gọi các hàm lấy dữ liệu song song để tối ưu tốc độ tải trang
   const [products, userRole] = await Promise.all([
     getProducts(),
     getUserRole(),
   ]);
 
-  // Bây giờ bạn đã có biến `userRole` để sử dụng
-  console.log("Current User Role:", userRole);
-
   return (
-    <main className="container mx-auto py-12 px-4">
-      <h1 className="text-3xl font-bold text-center mb-10">Our Products</h1>
-      
-      {/* Ví dụ về cách sử dụng userRole: Chỉ Admin mới thấy nút này */}
-      {userRole === 'ADMIN' && (
-        <div className="text-center mb-8">
-            <Link href="/admin">
-                <Button>Go to Admin Dashboard</Button>
-            </Link>
+    <main className=" h-[90vh]">
+      <div className="container mx-auto py-16 px-4">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-neutral-900">
+            Our Products
+          </h1>
+          <p className="mt-4 text-lg text-neutral-500">
+            Discover the latest in technology and innovation.
+          </p>
         </div>
-      )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {products.map((product: any) => (
-          <div key={product.id} className="border p-4 rounded-lg overflow-hidden gr-gray-50/50 hover:shadow-lg transition-shadow duration-300 flex flex-col">
-            <Link href={`/products/${product.id}`} className="group flex-grow">
-              <Image
-                src={product.imageUrl || 'https://placehold.co/400x300'}
-                alt={product.name}
-                width={400}
-                height={300}
-                className="w-full h-48 object-cover mb-4 group-hover:scale-105 transition-transform duration-300 rounded-md"
-              />
-              <div className="p-4">
-                <h2 className="text-xl font-semibold mb-2">{product.name}</h2>
-                {/* Có thể ẩn mô tả trên card để giao diện gọn hơn */}
-                {/* <p className="text-gray-600 mb-4">{product.description}</p> */}
-                <p className="text-lg font-bold">${product.price.toFixed(2)}</p>
+        {userRole === "ADMIN" && (
+          <div className="text-center mb-12">
+            <Link href="/admin">
+              <Button>Go to Admin Dashboard</Button>
+            </Link>
+          </div>
+        )}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {products.map((product: any) => (
+            // Bọc toàn bộ card trong Link để dễ click
+            <Link
+              href={`/products/${product.id}`}
+              key={product.id}
+              className="group block"
+            >
+              <div className="bg-white rounded-xl shadow-sm hover:shadow-2xl transition-all duration-300 ease-in-out flex flex-col h-full overflow-hidden">
+                {/* Phần hình ảnh */}
+                <div className="relative w-full h-60 overflow-hidden rounded-t-xl">
+                  <img
+                    src={product.imageUrl || "https://placehold.co/600x400"}
+                    alt={product.name}
+                    // Dùng class của Tailwind để thay thế cho `fill` và `style`
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                {/* Phần nội dung text */}
+                <div className="p-6 flex flex-col flex-grow">
+                  <h2 className="text-lg font-semibold text-neutral-800 mb-2 truncate">
+                    {product.name}
+                  </h2>
+                  <p className="text-2xl font-bold text-neutral-900">
+                    ${product.price.toFixed(2)}
+                  </p>
+                  <div className="mt-auto pt-6">
+                    <Button variant="outline" className="w-full">
+                      View Details
+                    </Button>
+                  </div>
+                </div>
               </div>
             </Link>
-            <div className="mt-auto p-4 pt-0">
-               
-                <Button variant="outline" className="w-full">
-                    Add to Cart
-                </Button>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </main>
   );
