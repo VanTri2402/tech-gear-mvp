@@ -46,9 +46,9 @@ export function ProductForm({
     });
 
     if (response.ok) {
+      router.refresh();
       setOpen(false);
-     router.refresh();
-     return;
+      return;
     } else {
       alert(`Failed to ${isEditMode ? "update" : "create"} product`);
       return;

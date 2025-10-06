@@ -1,103 +1,76 @@
-// src/app/products/[productId]/page.tsx
+// ... các import giữ nguyên ...
+
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import { WishlistButton } from "@/components/WishListButton";
+import Link from "next/link";
 import prisma from "@/lib/db";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import Image from "next/image";
-import { notFound } from "next/navigation";
-
-async function getProductDetails(productId: string) {
-  // Dùng biến môi trường, an toàn hơn
-  const res = await fetch(
-    `${process.env.KINDE_SITE_URL}/api/products/${productId}`,
-    {
-      cache: "no-store",
-    }
-  );
-  if (!res.ok) {
-    return null;
-  }
-  return res.json();
-}
-
-async function getUserWishlist() {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
-  if (!user) return [];
-
-  const userData = await prisma.user.findUnique({
-    where: { id: user.id },
-    select: { wishlist: { select: { id: true } } },
-  });
-  return userData?.wishlist.map((p) => p.id) || [];
-}
-
-export default async function ProductPage({
-  params,
-}: {
-  params: { productId: string };
-}) {
+import { CarTaxiFrontIcon, ShoppingCartIcon } from "lucide-react";
+const ProductDetail = async ({ params }: { params: { productId: string } }) => {
   const { productId } = params;
-
-  const [product, wishlist] = await Promise.all([
-    getProductDetails(productId),
-    getUserWishlist(),
-  ]);
-
-  if (!product) {
-    notFound(); // Hiển thị trang 404 nếu không tìm thấy sản phẩm
-  }
-
-  const initialIsInWishlist = wishlist.includes(product.id);
+  const product = await prisma.product.findUnique({
+    where: { id: productId },
+    include: { category: true },
+  });
 
   return (
-    <div className="bg-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-          {/* Phần hình ảnh */}
-          <div className="bg-neutral-100 rounded-2xl flex items-center justify-center p-8 aspect-square">
-            <div className="relative w-full h-full">
-              <Image
-                src={product.imageUrl || "https://placehold.co/600"}
-                alt={product.name}
-                fill
-                style={{ objectFit: "contain" }}
-                className="drop-shadow-xl"
-              />
-            </div>
-          </div>
-
-          {/* Phần thông tin */}
-          <div>
-            <span className="text-sm font-semibold text-blue-600 uppercase">
-              {product.category.name}
-            </span>
-            <h1 className="text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 mt-2">
-              {product.name}
-            </h1>
-            <p className="mt-4 text-3xl text-neutral-900">
-              {product.price.toLocaleString("en-US", {
-                style: "currency",
-                currency: "USD",
-              })}
-            </p>
-            <div className="mt-6 prose prose-neutral">
-              <p>{product.description}</p>
-            </div>
-
-            {/* Phần nút hành động */}
-            <div className="mt-8 flex flex-col gap-4">
-              <Button size="lg" className="w-full">
-                Add to Cart
-              </Button>
-              <WishlistButton
-                productId={product.id}
-                initialIsInWishlist={initialIsInWishlist}
-              />
-            </div>
+    <Card className="w-[1080px] h-[120%] py-4 px-2 m-auto mt-[120px]">
+      <CardContent className="flex justify-start gap-8 h-full">
+        <div className="w-[55%] flex-shrink-0">
+          <div className="relative aspect-square rounded-lg overflow-hidden shadow-xl group cursor-pointer">
+            <img
+              src={product?.imageUrl || "https://placehold.co/600x600"}
+              alt={product?.name || "Product Image"}
+              // Đảm bảo ảnh lấp đầy khung và giữ tỷ lệ
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            />
           </div>
         </div>
-      </div>
-    </div>
+
+        <div className="w-[50%] flex flex-col h-full">
+          <div className="flex-grow space-y-4 pt-4">
+            <CardHeader className="p-0 space-y-2">
+              <CardTitle className="text-3xl font-bold hover:scale-[1.01] duration-200">
+                {product?.name}
+              </CardTitle>
+            </CardHeader>
+            <div className="flex items-center justify-between mt-8 ">
+              <div className="text-lg text-center text-gray-500 pb-4">
+                {product?.price} USD
+              </div>
+              <div className="w-auto text-left">
+                {product?.id && (
+                  <WishlistButton
+                    productId={product.id}
+                    initialIsInWishlist={false}
+                  />
+                )}
+              </div>
+            </div>
+            <Separator />
+            <CardDescription className="pt-4">
+              <div className="text-base">{product?.description}</div>
+            </CardDescription>
+          </div>
+          <CardFooter className="p-0 mt-8">
+            <Button size="lg" className="w-[50%]">
+              Buy Product
+              <ShoppingCartIcon />
+            </Button>
+          </CardFooter>
+        </div>
+      </CardContent>
+    </Card>
   );
-}
+};
+
+export default ProductDetail;

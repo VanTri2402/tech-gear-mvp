@@ -26,7 +26,7 @@ export function NavigationMenu() {
             className={cn(
               "text-md font-medium hover:text-blue-500 transform hover:scale-105 duration-300",
               isActive
-                ? "text-neutral-900" // Màu chữ cho link active
+                ? "" // Màu chữ cho link active
                 : "text-neutral-500 hover:text-blue-500" // Màu chữ cho link thường
             )}
           >

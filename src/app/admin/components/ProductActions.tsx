@@ -25,16 +25,14 @@ interface ProductActionsProps {
 export function ProductActions({ product, categories }: ProductActionsProps) {
   const router = useRouter();
   async function deleteProduct() {
-    const res = await fetch(
-      `/api/products/${product.id}`,
-      {
-        method: "DELETE",
-      }
-    );
+    const res = await fetch(`/api/products/${product.id}`, {
+      method: "DELETE",
+    });
     if (res.ok) {
-      return router.refresh();
+      router.refresh();
+      return;
     } else {
-     return alert("Failed to delete the product");
+      return alert("Failed to delete the product");
     }
   }
   return (
@@ -58,7 +56,7 @@ export function ProductActions({ product, categories }: ProductActionsProps) {
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction onClick={deleteProduct} asChild>
-              <Button variant={'destructive'}>DELETE</Button>
+              <Button variant={"destructive"}>DELETE</Button>
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
