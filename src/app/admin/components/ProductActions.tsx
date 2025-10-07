@@ -16,10 +16,12 @@ import {
 } from "@radix-ui/react-alert-dialog";
 import { useRouter } from "next/navigation";
 import { ProductForm } from "./ProductForm";
+import { ProductProps } from "@/types/ProductType";
+import { CategoryProps } from "@/types/CategoryType";
 
 interface ProductActionsProps {
-  product: any;
-  categories: any[];
+  product: ProductProps;
+  categories: CategoryProps[];
 }
 
 export function ProductActions({ product, categories }: ProductActionsProps) {

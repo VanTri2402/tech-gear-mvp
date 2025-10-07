@@ -27,11 +27,17 @@ const ProductDetail = async ({ params }: { params: { productId: string } }) => {
       <CardContent className="flex justify-start gap-8 h-full">
         <div className="w-[55%] flex-shrink-0">
           <div className="relative aspect-square rounded-lg overflow-hidden shadow-xl group cursor-pointer">
-            <img
-              src={product?.imageUrl || "https://placehold.co/600x600"}
+            <Image
+              src={
+                product?.imageUrl ||
+                "https://placehold.co/600x600" ||
+                "/placeholder.jpg"
+              }
               alt={product?.name || "Product Image"}
               // Đảm bảo ảnh lấp đầy khung và giữ tỷ lệ
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              fill
+              quality={80}
+              className="object-center w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
           </div>
         </div>

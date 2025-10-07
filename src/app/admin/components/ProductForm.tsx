@@ -14,13 +14,15 @@ import {
 } from "@/components/ui/dialog";
 import { useRouter } from "next/navigation";
 import { InputTemplate } from "@/components/InputTemplate";
+import { CategoryProps } from "@/types/CategoryType";
+import { ProductProps } from "@/types/ProductType";
 
 export function ProductForm({
   categories,
   initialData,
 }: {
-  categories: any[];
-  initialData?: any;
+  categories: CategoryProps[];
+  initialData?: ProductProps;
 }) {
   const [open, setOpen] = React.useState(false);
   const router = useRouter();

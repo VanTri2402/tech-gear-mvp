@@ -54,7 +54,7 @@ export default function CategoryActions({
       // Chỉ thực hiện khi thành công
       setOpenDeleteDialog(false);
       router.refresh();
-    } catch (error: any) {
+    } catch (error: ) {
       console.error("Delete Error:", error);
       alert(error.message); // Hiển thị lỗi chính xác cho người dùng
     } finally {

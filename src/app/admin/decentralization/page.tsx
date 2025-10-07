@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/table";
 import { UserActions } from "./components/UserActions";
 import { headers } from "next/headers"; // <-- BƯỚC 1: Import headers
+import { UserProps } from "@/types/UserType";
 
 async function getUsers() {
   // BƯỚC 2: Lấy headers từ request gốc
@@ -48,7 +49,7 @@ const DecentralizationPage = async () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {users.map((user: any) => (
+            {users.map((user: UserProps) => (
               <TableRow key={user.id}>
                 <TableCell className="font-medium">{user.email}</TableCell>
                 <TableCell>{user.firstName || "N/A"}</TableCell>

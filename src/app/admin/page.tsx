@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/table";
 import { ProductForm } from "./components/ProductForm";
 import { ProductActions } from "./components/ProductActions";
+import { ProductProps } from "@/types/ProductType";
 
 async function getProducts() {
   const res = await fetch(`${process.env.KINDE_SITE_URL}/api/products`, {
@@ -50,18 +51,20 @@ const AdminPage = async () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {products.map((product: any) => (
-              <TableRow key={product.id}>
-                <TableCell className="font-medium">{product.name}</TableCell>
-                <TableCell>
-                  ${product.price.toLocaleString("en-US")} $
-                </TableCell>
-                <TableCell>{product.category.name}</TableCell>
-                <TableCell className="text-right">
-                  <ProductActions product={product} categories={categories} />
-                </TableCell>
-              </TableRow>
-            ))}
+            {products.map((product: ProductProps) => {
+              return (
+                <TableRow key={product.id}>
+                  <TableCell className="font-medium">{product.name}</TableCell>
+                  <TableCell>
+                    ${product.price.toLocaleString("en-US")} $
+                  </TableCell>
+                  <TableCell>{product.category.name}</TableCell>
+                  <TableCell className="text-right">
+                    <ProductActions product={product} categories={categories} />
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </div>
