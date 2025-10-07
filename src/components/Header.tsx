@@ -22,9 +22,8 @@ const getCombinedUserData = async () => {
     where: { id: user.id },
   });
 
-  // Kết hợp dữ liệu từ Kinde và từ DB
   return {
-    ...user, // id, email, given_name, family_name, picture từ Kinde
+    ...user,
     role: dbUser?.role, // role từ DB
   };
 };
@@ -33,8 +32,6 @@ const Header = async () => {
   const { isAuthenticated } = getKindeServerSession();
   const userData = await getCombinedUserData();
 
-  // Logic upsert có thể giữ nguyên nếu bạn muốn
-  // ...
 
   return (
     <header className="backdrop-blur-md sticky top-0 z-50 border-b">

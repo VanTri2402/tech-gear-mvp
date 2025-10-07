@@ -44,7 +44,7 @@ export default async function HomePage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16">
         {/* Header Section */}
         <div className="flex items-end justify-between mb-12">
-          <h1 className="text-4xl sm:text-5xl font-semibold text-gray-900 tracking-tight">
+          <h1 className="text-4xl sm:text-5xl font-semibold  tracking-tight">
             Khám phá dòng sản phẩm.
           </h1>
           {userRole === "ADMIN" ? (
