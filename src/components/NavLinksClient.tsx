@@ -89,7 +89,7 @@ export function NavLinksClient({
           )}
         </NavigationMenuTrigger>
         <NavigationMenuContent>
-          <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+          <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] grid-cols-3 grid-rows-2 d:grid-cols-2 lg:w-[600px]">
             {categories.map((category) => (
               <ListItem
                 key={category.id}
