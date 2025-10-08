@@ -2,6 +2,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { showToast } from "@/utils/toast";
 import { Heart } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -30,7 +31,7 @@ export function WishlistButton({
       }
     } catch (error) {
       console.error(error);
-      alert("Please log in to manage your wishlist.");
+      showToast("Please log in to manage your wishlist.", "error");
     } finally {
       setLoading(false);
     }

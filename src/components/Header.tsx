@@ -32,7 +32,6 @@ const Header = async () => {
   const { isAuthenticated } = getKindeServerSession();
   const userData = await getCombinedUserData();
 
-
   return (
     <header className="backdrop-blur-md sticky top-0 z-50 border-b">
       <nav className="container mx-auto px-6 h-20 flex items-center justify-between">

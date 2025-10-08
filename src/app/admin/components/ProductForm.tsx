@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { InputTemplate } from "@/components/InputTemplate";
 import { CategoryProps } from "@/types/CategoryType";
 import { ProductProps } from "@/types/ProductType";
+import { showToast } from "@/utils/toast";
 
 export function ProductForm({
   categories,
@@ -52,7 +53,10 @@ export function ProductForm({
       setOpen(false);
       return;
     } else {
-      alert(`Failed to ${isEditMode ? "update" : "create"} product`);
+      showToast(
+        `Failed to ${isEditMode ? "update" : "create"} product`,
+        "success"
+      );
       return;
     }
   }

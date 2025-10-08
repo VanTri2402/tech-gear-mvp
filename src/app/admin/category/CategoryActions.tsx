@@ -25,6 +25,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
 import React, { useState, FormEvent } from "react";
+import { showToast } from "@/utils/toast";
 
 export default function CategoryActions({
   category,
@@ -54,9 +55,9 @@ export default function CategoryActions({
       // Chỉ thực hiện khi thành công
       setOpenDeleteDialog(false);
       router.refresh();
-    } catch (error: ) {
+    } catch (error: any) {
       console.error("Delete Error:", error);
-      alert(error.message); // Hiển thị lỗi chính xác cho người dùng
+      showToast(error.message, "error"); // Hiển thị lỗi chính xác cho người dùng
     } finally {
       setLoading(false);
     }
@@ -75,19 +76,21 @@ export default function CategoryActions({
         body: JSON.stringify({ name }),
       });
 
-      if (!response.ok) {
+      if (response.status !== 200) {
         throw new Error("Failed to update category");
+      } else {
+        setCategoryName(name);
+        setOpenUpdateDialog(false);
+        router.refresh();
       }
-
-      setOpenUpdateDialog(false);
-      router.refresh();
     } catch (error: any) {
       console.error("Update Error:", error);
-      alert(error.message);
+      showToast(error.message, "error");
     } finally {
       setLoading(false);
     }
   };
+  const [categoryName, setCategoryName] = useState(category.name);
 
   return (
     <div className="flex items-center justify-end gap-2">

@@ -31,7 +31,7 @@ const CategoryPage = async () => {
   const categories = await fetchCategories();
 
   return (
-    <div className="container mx-auto py-10 ">
+    <div className="container mx-auto py-10">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Categories Management</h1>
         <CreateCategoryDialog /> {/* <-- Sử dụng ở đây */}

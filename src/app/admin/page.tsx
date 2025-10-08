@@ -10,25 +10,9 @@ import {
 import { ProductForm } from "./components/ProductForm";
 import { ProductActions } from "./components/ProductActions";
 import { ProductProps } from "@/types/ProductType";
+import getProducts from "@/Data/getProdcut";
+import getCategories from "@/Data/getCategory";
 
-async function getProducts() {
-  const res = await fetch(`${process.env.KINDE_SITE_URL}/api/products`, {
-    cache: "no-store",
-  });
-  if (!res.ok) {
-    throw new Error("Failed to fetch products");
-  }
-  return res.json();
-}
-async function getCategories() {
-  const res = await fetch(`${process.env.KINDE_SITE_URL}/api/categories`, {
-    cache: "no-store",
-  });
-  if (!res.ok) {
-    throw new Error("Failed to fetch categories");
-  }
-  return res.json();
-}
 const AdminPage = async () => {
   const products = await getProducts();
   const categories = await getCategories();

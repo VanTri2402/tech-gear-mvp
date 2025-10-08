@@ -11,31 +11,18 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { ProductProps } from "@/types/ProductType";
 import { CategoryProps } from "@/types/CategoryType";
+import getCategories from "@/Data/getCategory";
+import getProducts from "@/Data/getProdcut";
 
-async function getProducts() {
-  const res = await fetch(`${process.env.KINDE_SITE_URL}/api/products`, {
-    cache: "no-store",
-    method: "GET",
-  });
-  if (!res.ok) throw new Error("Failed to fetch products");
-  return res.json();
-}
-
-async function getCategories() {
-  const res = await fetch(`${process.env.KINDE_SITE_URL}/api/categories`, {
-    cache: "no-store",
-  });
-  if (!res.ok) {
-    throw new Error("Failed to fetch categories");
-  }
-  return res.json();
-}
 const Footer = async () => {
   const categories = await getCategories();
   const products = await getProducts();
   return (
-    <div className="border border-t">
-      <div className="w-full mx-auto max-w-[1400px] grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 px-16 sm:px-10 py-12 border-gray-200">
+    // THAY THẺ DIV GỐC BẰNG THẺ <FOOTER> VÀ LOẠI BỎ CÁC CLASS ĐỊNH VỊ
+    <footer className="w-full border-t border-gray-200 bg-white">
+      {/* Container của nội dung Footer */}
+      <div className="w-full mx-auto max-w-[1400px] grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 px-16 sm:px-10 py-12">
+        {/* Cột 1: TechGearAlden */}
         <div className="flex flex-col gap-4 pr-8 mb-8 lg:mb-0">
           <div className="font-bold text-2xl">
             <h1>
@@ -62,54 +49,38 @@ const Footer = async () => {
           </div>
         </div>
 
-        {/* Cột 2: Sản phẩm theo Category */}
-        {/* Bỏ w-[calc(25%-10px)]] và dùng space-y-2 để giãn cách gọn gàng */}
+        {/* Cột 2, 3, 4 giữ nguyên */}
+        {/* ... */}
         <div className="flex flex-col space-y-2 mb-8 lg:mb-0">
           <div className="font-bold text-lg mb-4 ">Sản phẩm</div>
-          {categories.slice(0, 5).map(
-            (
-              item: CategoryProps // Giới hạn 5 mục cho Footer gọn
-            ) => (
-              <Link
-                href={`/products/category/${item.id}`}
-                key={item.id}
-                className="text-sm text-gray-600 hover:text-blue-500 transition-colors"
-              >
-                {item.name}
-              </Link>
-            )
-          )}
+          {categories.slice(0, 5).map((item: CategoryProps) => (
+            <Link
+              key={item.id}
+              href={`/products/category/${item.id}`}
+              className="text-sm text-gray-600 hover:text-blue-500 transition-colors"
+            >
+              {item.name}
+            </Link>
+          ))}
         </div>
-
-        {/* Cột 3: Sản phẩm mới (hoặc Sản phẩm nổi bật) */}
-        {/* Tương tự, dùng space-y-2 */}
         <div className="flex flex-col space-y-2 mb-8 md:mb-0">
           <div className="font-bold text-lg mb-4 ">Tin tức & Mới</div>
-          {products.slice(0, 5).map(
-            (
-              item: ProductProps // Giới hạn 5 mục
-            ) => (
-              <Link
-                href={`/products/${item.id}`}
-                key={item.id}
-                className="text-sm text-gray-600 hover:text-blue-500 transition-colors"
-              >
-                {item.name}
-              </Link>
-            )
-          )}
+          {products.slice(0, 5).map((item: ProductProps) => (
+            <Link
+              key={item.id}
+              href={`/products/${item.id}`}
+              className="text-sm text-gray-600 hover:text-blue-500 transition-colors"
+            >
+              {item.name}
+            </Link>
+          ))}
         </div>
-
-        {/* Cột 4: Địa chỉ liên hệ & Hỗ trợ */}
-        {/* Bỏ w-[250px] và sử dụng flex-col space-y-4 */}
         <div className="flex flex-col space-y-4">
           <div className="font-bold text-lg mb-2 ">Hỗ trợ & Liên hệ</div>
           <p className="text-sm text-gray-600 leading-relaxed">
             Khi gặp vấn đề, hãy liên hệ các địa chỉ bên dưới để được hỗ trợ sớm
             nhất.
           </p>
-
-          {/* Các nút liên hệ - dùng space-y-3 thay vì bọc div */}
           <Link href={"https://github.com/VanTri2402"} passHref>
             <Button
               variant="outline"
@@ -124,10 +95,9 @@ const Footer = async () => {
               doanh
             </Button>
           </Link>
-          {/* Giữ lại 2 nút chính này (20/80) và bỏ 2 nút Google/Instagram ít dùng */}
         </div>
       </div>
-    </div>
+    </footer>
   );
 };
 

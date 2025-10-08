@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 import { ProductForm } from "./ProductForm";
 import { ProductProps } from "@/types/ProductType";
 import { CategoryProps } from "@/types/CategoryType";
+import { showToast } from "@/utils/toast";
 
 interface ProductActionsProps {
   product: ProductProps;
@@ -34,7 +35,7 @@ export function ProductActions({ product, categories }: ProductActionsProps) {
       router.refresh();
       return;
     } else {
-      return alert("Failed to delete the product");
+      return showToast("Failed to delete the product", "error");
     }
   }
   return (

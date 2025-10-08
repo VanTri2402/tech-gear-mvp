@@ -21,18 +21,22 @@ export default async function middleware(req: NextRequest) {
     });
 
     // --- THÊM DÒNG DEBUG Ở ĐÂY ---
-    console.log(`[MIDDLEWARE DEBUG] User ID: ${user.id}, Role in DB: ${dbUser?.role}`);
+    console.log(
+      `[MIDDLEWARE DEBUG] User ID: ${user.id}, Role in DB: ${dbUser?.role}`
+    );
     // ----------------------------
 
     if (dbUser?.role !== "ADMIN") {
-      console.log("[MIDDLEWARE ACTION] Redirecting to home page because role is not ADMIN.");
+      console.log(
+        "[MIDDLEWARE ACTION] Redirecting to home page because role is not ADMIN."
+      );
       const homeURL = new URL("/", req.url);
       return NextResponse.redirect(homeURL);
     }
   } catch (error) {
     // ...
   }
-  
+
   console.log("[MIDDLEWARE ACTION] Allowing access to /admin.");
   return NextResponse.next();
 }

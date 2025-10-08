@@ -5,16 +5,9 @@ import { getUserRole } from "@/lib/admin-auth";
 import Image from "next/image";
 import { ProductProps } from "@/types/ProductType";
 import { ChevronRight } from "lucide-react";
+import getProducts from "@/Data/getProdcut";
 
 // --- Hàm lấy dữ liệu (giữ nguyên) ---
-async function getProducts() {
-  const res = await fetch(`${process.env.KINDE_SITE_URL}/api/products`, {
-    cache: "no-store",
-    method: "GET",
-  });
-  if (!res.ok) throw new Error("Failed to fetch products");
-  return res.json();
-}
 
 // Hàm tạo màu gradient theo category
 function getCategoryGradient(category: string | { id: number; name: string }) {
@@ -104,15 +97,10 @@ export default async function HomePage() {
                   {/* Pricing - Đã sửa định dạng giá */}
                   <div className="mb-8">
                     <p className="text-sm text-gray-900">
-                      Từ
+                      Từ{" "}
                       <span className="font-semibold text-lg">
                         {product.price.toLocaleString("vi-VN")} $
                       </span>
-                    </p>
-                    <p className="text-xs text-gray-500 mt-1">
-                      hoặc
-                      {(product.price / 24).toFixed(0).toLocaleString("vi-VN")}
-                      ₫/th. trong 24 tháng!
                     </p>
                   </div>
 
