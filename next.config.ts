@@ -26,6 +26,12 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "static.iphoned.nl",
       },
+      {
+        protocol: "https",
+        hostname: "www.apple.com",
+        port: "",
+        pathname: "/v/mac/welcome/g/images/overview/**", // Chỉ định rõ đường dẫn ảnh nếu cần
+      },
     ],
   },
 };

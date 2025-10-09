@@ -9,7 +9,6 @@ import { Button } from "./ui/button";
 import prisma from "@/lib/db";
 import { UserProfile } from "./UserProfile";
 import { NavigationMenu } from "./NavigationMenu";
-import { ModeToggle } from "./ui/modeToggle";
 
 // Hàm helper để lấy dữ liệu người dùng tổng hợp
 const getCombinedUserData = async () => {
@@ -40,27 +39,22 @@ const Header = async () => {
             TechGear<span className="text-blue-600">Alden</span>
           </Link>
         </div>
-        <div className="flex-1 flex justify-center">
+        <div className="flex flex-1 justify-center">
           {userData?.role === "ADMIN" && <NavigationMenu />}
         </div>
-        <div className="flex-1 flex justify-end">
-          <div className="my-auto">
-            <ModeToggle />
-          </div>
-          <div className="flex items-center gap-4">
-            {!(await isAuthenticated()) || !userData ? (
-              <>
-                <LoginLink>
-                  <Button variant="ghost">Log In</Button>
-                </LoginLink>
-                <RegisterLink>
-                  <Button>Sign Up</Button>
-                </RegisterLink>
-              </>
-            ) : (
-              <UserProfile user={userData} />
-            )}
-          </div>
+        <div className="flex flex-1 items-center justify-end gap-4">
+          {!(await isAuthenticated()) || !userData ? (
+            <>
+              <LoginLink>
+                <Button variant="ghost">Log In</Button>
+              </LoginLink>
+              <RegisterLink>
+                <Button>Sign Up</Button>
+              </RegisterLink>
+            </>
+          ) : (
+            <UserProfile user={userData} />
+          )}
         </div>
       </nav>
     </header>
