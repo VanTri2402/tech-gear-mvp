@@ -46,12 +46,12 @@ export const menuMacInfo = [
         title: "Đưa Máy Cũ Cho Chúng Tôi. Tiết Kiệm Khi Mua Máy Mới.",
         description:
           "Với Apple Trade In, bạn có thể nhận được khoản giá trị xứng đáng khi đổi thiết bị đang dùng và sử dụng giá trị đó để mua thiết bị mới. Nếu thiết bị của bạn không đủ điều kiện để đổi lấy điểm tín dụng, chúng tôi sẽ tái chế thiết bị miễn phí.²",
-        imageUrl: "https://www.apple.com/vn/mac/#how-to-switch", // Giả định URL liên kết đến phần Trade In
+        imageUrl: "https://www.apple.com/vn/shop/goto/trade_in#mac", // Giả định URL liên kết đến phần Trade In
       },
       {
         title: "Mac Làm Được Đó.",
         description: "Hãy xem chuyển sang dùng Mac dễ dàng đến thế nào.",
-        imageUrl: "https://www.apple.com/vn/mac/#how-to-switch", // Giả định URL liên kết đến hướng dẫn chuyển đổi
+        imageUrl: "https://www.apple.com/vn/mac/mac-does-that/", // Giả định URL liên kết đến hướng dẫn chuyển đổi
       },
     ],
   },
