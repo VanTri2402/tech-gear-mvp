@@ -6,7 +6,7 @@ export const SmoothScrollContainer = ({
 }) => {
   return (
     <div className="relative group min-w-screen">
-      <div className="overflow-x-auto pb-6 -mx-4 px-4 scroll-smooth snap-x snap-mandatory [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-gray-400">
+      <div className=" pb-6 -mx-4 px-4 scroll-smooth snap-x snap-mandatory [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-gray-400">
         <div className="flex gap-4 md:gap-6" style={{ width: "max-content" }}>
           {children}
         </div>

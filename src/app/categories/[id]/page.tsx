@@ -3,6 +3,7 @@ import IPadDetail from "@/components/CategoryDetail/IpadDetail";
 import IPhoneDetail from "@/components/CategoryDetail/IphoneDetail";
 import MacDetail from "@/components/CategoryDetail/MacDetail";
 import React from "react";
+import AirPodsDetail from "@/components/CategoryDetail/AirpodsDetail";
 
 const DetailCategory = ({ params }: { params: { id: string } }) => {
   return (
@@ -11,6 +12,7 @@ const DetailCategory = ({ params }: { params: { id: string } }) => {
       <IPhoneDetail params={params} />
       <IPadDetail params={params} />
       <WatchDetail params={params} />
+      <AirPodsDetail params={params} />
     </div>
   );
 };

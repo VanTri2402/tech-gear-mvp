@@ -190,7 +190,7 @@ const IPadDetail = async ({ params }: { params: { id: string } }) => {
           </h2>
 
           {/* Horizontal Scroll Cards */}
-          <div className="overflow-x-auto pb-6 -mx-4 px-4">
+          <div className=" pb-6 -mx-4 px-4 overflow-x-auto scrollbar-hide">
             <div
               className="flex gap-4 md:gap-6"
               style={{ width: "max-content" }}
@@ -278,7 +278,7 @@ const IPadDetail = async ({ params }: { params: { id: string } }) => {
             {menuIPadInfo[3].title}
           </h2>
 
-          <div className="flex gap-8 md:gap-12 overflow-x-scroll">
+          <div className="flex gap-8 md:gap-12 overflow-x-auto scrollbar-hide">
             <SmoothScrollContainer>
               {menuIPadInfo[3].WhyIPadCards?.map((card, index) => (
                 <div

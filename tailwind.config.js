@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 // file: tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -9,5 +10,6 @@ module.exports = {
       },
     },
   },
+  plugins: [require("tailwind-scrollbar-hide")],
   // ...
 };

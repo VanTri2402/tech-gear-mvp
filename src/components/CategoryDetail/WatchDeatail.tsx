@@ -162,7 +162,7 @@ const WatchDetail = async ({ params }: { params: { id: string } }) => {
             {menuWatchInfo[0].title}
           </h2>
 
-          <div className="overflow-x-auto pb-6 -mx-4 px-4">
+          <div className=" overflow-x-auto scrollbar-hide pb-6 -mx-4 px-4">
             <SmoothScrollContainer>
               {menuWatchInfo[0].cards?.map((card, index) => (
                 <a
@@ -285,7 +285,7 @@ const WatchDetail = async ({ params }: { params: { id: string } }) => {
             {menuWatchInfo[4].title}
           </h2>
 
-          <div className="overflow-x-auto pb-6 -mx-4 px-4">
+          <div className=" pb-6 -mx-4 px-4 overflow-x-auto scrollbar-hide">
             <SmoothScrollContainer>
               {menuWatchInfo[4].WhyWatchCards?.map((card, index) => (
                 <div

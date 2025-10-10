@@ -133,7 +133,7 @@ export const IPadTopNav = () => {
   return (
     <div className="w-full bg-[#fbfbfd] border-b border-gray-200 sticky top-0 ">
       <div className="max-w-[1440px] mx-auto px-4">
-        <div className="flex items-center justify-center gap-8 py-6 overflow-x-auto scrollbar-hide">
+        <div className="flex items-center justify-center gap-8 py-6  scrollbar-hide">
           {navItems.map((item) => (
             <Link
               key={item.name}
@@ -226,7 +226,7 @@ export const IPhoneTopNav = () => {
   return (
     <div className="w-full bg-[#fbfbfd] border-b border-gray-200 sticky top-0 ">
       <div className="max-w-[1440px] mx-auto px-4">
-        <div className="flex items-center justify-center gap-8 py-6 overflow-x-auto scrollbar-hide">
+        <div className="flex items-center justify-center gap-8 py-6  scrollbar-hide">
           {navItems.map((item) => (
             <Link
               key={item.name}
@@ -327,7 +327,7 @@ export const MacTopNav = () => {
   return (
     <div className="w-full bg-[#fbfbfd] border-b border-gray-200 sticky top-0 ">
       <div className="max-w-[1440px] mx-auto px-4">
-        <div className="flex items-center justify-center gap-8 py-6 overflow-x-auto scrollbar-hide">
+        <div className="flex items-center justify-center gap-8 py-6  scrollbar-hide">
           {navItems.map((item) => (
             <Link
               key={item.name}
@@ -419,7 +419,7 @@ export const WatchTopNav = () => {
   return (
     <div className="w-full bg-[#fbfbfd] border-b border-gray-200 sticky top-0 ">
       <div className="max-w-[1440px] mx-auto px-4">
-        <div className="flex items-center justify-center gap-8 py-6 overflow-x-auto scrollbar-hide">
+        <div className="flex items-center justify-center gap-8 py-6  scrollbar-hide">
           {navItems.map((item) => (
             <a
               key={item.name}
@@ -507,7 +507,7 @@ export const AirPodsTopNav = () => {
   return (
     <div className="w-full bg-[#fbfbfd] border-b border-gray-200 sticky top-0 ">
       <div className="max-w-[1440px] mx-auto px-4">
-        <div className="flex items-center justify-center gap-8 py-6 overflow-x-auto scrollbar-hide">
+        <div className="flex items-center justify-center gap-8 py-6  scrollbar-hide">
           {navItems.map((item) => (
             <Link
               key={item.name}

@@ -201,7 +201,7 @@ const IPhoneDetail = async ({ params }: { params: { id: string } }) => {
           </h2>
 
           {/* Horizontal Scroll Cards */}
-          <div className="overflow-x-auto pb-6 -mx-4 px-4">
+          <div className=" pb-6 -mx-4 px-4">
             <div
               className="flex gap-4 md:gap-6"
               style={{ width: "max-content" }}
