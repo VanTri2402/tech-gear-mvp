@@ -1,4 +1,4 @@
-import React from "react";
+import React, { JSX } from "react";
 import Image from "next/image";
 import { menuWatchInfo } from "@/Data/WatchInfo";
 import { WatchTopNav } from "../ComponentDetailCategories/Nav";
@@ -19,7 +19,7 @@ import prisma from "@/lib/db";
 import Link from "next/link";
 import { Button } from "../ui/button";
 // Icon mapping
-const iconMap = {
+const iconMap: Record<string, JSX.Element> = {
   heart_health: <Heart className="w-12 h-12" />,
   fitness_activity: <Activity className="w-12 h-12" />,
   safety_sos: <Shield className="w-12 h-12" />,
