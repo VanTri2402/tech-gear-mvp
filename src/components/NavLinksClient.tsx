@@ -56,7 +56,7 @@ export function NavLinksClient({
   const pathname = usePathname();
 
   return (
-    <NavigationMenuList className="flex items-center gap-x-8">
+    <NavigationMenuList className="flex z-30 items-center gap-x-8">
       {/* 1. Các Link thông thường */}
       {navLinks.map((link) => {
         const isActive = pathname === link.href;

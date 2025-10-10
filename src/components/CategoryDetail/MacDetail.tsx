@@ -14,6 +14,7 @@ import {
   Settings,
   Tag,
 } from "lucide-react";
+import { MacTopNav } from "../ComponentDetailCategories/Nav";
 
 // Icon mapping for Why Mac section
 const iconMap: { [key: string]: React.ReactNode } = {
@@ -37,10 +38,12 @@ const MacDetail = async ({ params }: { params: { id: string } }) => {
   return (
     <div className="w-full bg-white text-[#1D1D1F] ">
       {/* Top Spacer */}
-      <div className="h-[52px] "></div>
+      <div className="h-[52px] ">
+        <MacTopNav />
+      </div>
 
       {/* Promotional Banner */}
-      <div className="w-full bg-[#F5F5F7] px-15 py-3 px-4">
+      <div className="w-full mt-17 py-3 px-4">
         <div className="max-w-[980px] mx-auto text-center">
           <p className="text-[14px] leading-[1.42859]">
             Thanh toán hàng tháng thật dễ dàng. Bao gồm lựa chọn lãi suất 0%.{" "}

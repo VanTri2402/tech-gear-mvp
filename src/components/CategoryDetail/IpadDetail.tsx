@@ -1,60 +1,53 @@
 import React from "react";
-import { menuIPhoneInfo } from "@/Data/IphoneInfo";
+import { menuIPadInfo } from "@/Data/IpadInfo";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import prisma from "@/lib/db";
-import getCategories from "@/Data/getCategory";
 import {
-  Camera,
-  Shield,
-  Cpu,
-  Battery,
-  Smartphone,
+  Tablet,
+  Pencil,
+  AppWindow,
+  Maximize,
+  Palette,
   Zap,
-  DollarSign,
+  Shield,
 } from "lucide-react";
 import { IPadTopNav } from "../ComponentDetailCategories/Nav";
+import { SmoothScrollContainer } from "../ComponentDetailCategories/smooth";
 
-// Icon mapping for Why iPhone section
+// Icon mapping for Why iPad section
 const iconMap: { [key: string]: React.ReactNode } = {
-  camera_pro: <Camera className="w-12 h-12" />,
-  security_shield: <Shield className="w-12 h-12" />,
-  ecosystem_devices: <Smartphone className="w-12 h-12" />,
-  performance_chip: <Cpu className="w-12 h-12" />,
-  battery_life: <Battery className="w-12 h-12" />,
-  durability_cert: <Shield className="w-12 h-12" />,
-  trade_in_value: <DollarSign className="w-12 h-12" />,
+  tablet_performance: <Zap className="w-12 h-12" />,
+  pencil_creative: <Pencil className="w-12 h-12" />,
+  apps_ecosystem: <AppWindow className="w-12 h-12" />,
+  display_quality: <Maximize className="w-12 h-12" />,
+  portability: <Tablet className="w-12 h-12" />,
+  multitasking: <AppWindow className="w-12 h-12" />,
+  camera_video: <Palette className="w-12 h-12" />,
 };
 
 // Hàm tạo màu gradient theo tên sản phẩm
 function getProductGradient(productName: string) {
   const name = productName.toLowerCase();
-  if (name.includes("pro max")) return "from-gray-800 to-gray-900";
-  if (name.includes("pro")) return "from-gray-700 to-gray-800";
-  if (name.includes("plus")) return "from-blue-400 to-blue-500";
-  if (name.includes("15")) return "from-pink-300 to-pink-400";
-  if (name.includes("14")) return "from-purple-300 to-purple-400";
-  if (name.includes("se")) return "from-red-500 to-red-600";
-  return "from-gray-300 to-gray-400";
+  if (name.includes("pro")) return "from-gray-700 to-gray-900";
+  if (name.includes("air")) return "from-blue-300 to-purple-300";
+  if (name.includes("mini")) return "from-purple-400 to-pink-400";
+  return "from-blue-200 to-blue-300";
 }
 
-const IPhoneDetail = async ({ params }: { params: { id: string } }) => {
+const IPadDetail = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
 
-  // Get iPhone category
-  const idDb = await prisma?.category.findUnique({
-    where: { name: "Iphone" },
+  const idDb = await prisma.category.findUnique({
+    where: { name: "Ipad" },
     include: {
       products: true,
     },
   });
 
   if (idDb?.id !== id) return <></>;
-
-  // Get all categories for comparison
-  const categories = await getCategories();
 
   return (
     <div className="w-full bg-white text-[#1D1D1F]">
@@ -64,10 +57,10 @@ const IPhoneDetail = async ({ params }: { params: { id: string } }) => {
       </div>
 
       {/* Promotional Banner */}
-      <div className="w-full mt-17 py-3 px-4">
+      <div className="w-full mt-16  py-3 px-4">
         <div className="max-w-[980px] mx-auto text-center">
           <p className="text-[14px] leading-[1.42859]">
-            Đặt trước iPhone mới nhất và nhận ưu đãi đặc biệt.{" "}
+            Mua iPad mới và nhận ưu đãi đặc biệt. Trả góp 0% lãi suất.{" "}
             <Link href="#" className="text-[#0066CC] hover:underline">
               Tìm hiểu thêm
             </Link>
@@ -76,41 +69,39 @@ const IPhoneDetail = async ({ params }: { params: { id: string } }) => {
       </div>
 
       {/* Hero Section */}
-      <div className="max-w-full px-15 mx-auto pt-10 md:pt-16 ">
+      <div className="w-full mx-auto px-15">
         <div className="flex items-center justify-between py-16 md:py-20">
           <h1 className="text-[56px] md:text-[80px] font-semibold leading-[1.05] tracking-tight">
-            iPhone
+            iPad
           </h1>
           <div className="text-right">
             <h2 className="text-[21px] md:text-[28px] font-semibold leading-[1.14286] tracking-tight">
-              Bạn nghĩ được <br />
-              iPhone làm được.
+              Chạm tới <br />
+              tuyệt vời.
             </h2>
           </div>
         </div>
 
         {/* Hero Video */}
-        <div className="relative w-full rounded-[28px] flex items-center justify-center overflow-hidden mb-12 mx-auto">
+        <div className="relative w-full rounded-[28px] overflow-hidden mb-12">
           <video
             autoPlay
             muted
             loop
             playsInline
-            className="min-w-[1400px] min-h-[500px] object-cover object-center rounded-4xl"
+            className="w-full h-auto"
+            poster="https://www.apple.com/v/ipad/home/ck/images/overview/hero/ipad_hero__ecv0mfm95eie_large.jpg"
           >
-            <source
-              src="https://www.apple.com/105/media/us/iphone/family/2024/cf19f185-dd7e-4350-97ff-e44860713b54/anim/welcome/large_2x.mp4"
-              type="video/mp4"
-            />
+            <source src="https://www.apple.com/assets-www/en_WW/ipad/welcome/x642ce92dd_large_2x.mp4" />
           </video>
         </div>
       </div>
 
-      {/* Section: Khám Phá Sản Phẩm iPhone (From Database) */}
+      {/* Section: Khám Phá Sản Phẩm iPad (From Database) */}
       <section className="w-full py-12 md:py-20 bg-[#FBFBFD]">
         <div className="max-w-[1440px] mx-auto px-4">
           <h2 className="text-[40px] md:text-[56px] font-semibold mb-8 md:mb-12 leading-[1.07143] tracking-tight">
-            Khám Phá Sản Phẩm iPhone
+            Khám Phá Sản Phẩm iPad
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
@@ -129,7 +120,10 @@ const IPhoneDetail = async ({ params }: { params: { id: string } }) => {
                   >
                     <div className="relative w-full h-full">
                       <Image
-                        src={product.imageUrl || "/placeholder.jpg"}
+                        src={
+                          product.imageUrl ||
+                          "https://www.apple.com/v/ipad/home/ck/images/overview/select/product-tile/pt_ipad_pro__6bgrkek0jnm2_large.png"
+                        }
                         alt={product.name}
                         fill
                         className="object-center object-cover transform group-hover:scale-105 transition-transform duration-500"
@@ -140,21 +134,18 @@ const IPhoneDetail = async ({ params }: { params: { id: string } }) => {
 
                   {/* Product Info */}
                   <div className="p-6 text-center bg-white">
-                    {/* Product Name */}
-                    <h3 className="text-2xl font-semibold  mb-2">
+                    <h3 className="text-2xl font-semibold mb-2">
                       {product.name}
                     </h3>
 
-                    {/* Description */}
                     {product.description && (
                       <p className="text-sm text-gray-600 mb-4 leading-relaxed line-clamp-2">
                         {product.description}
                       </p>
                     )}
 
-                    {/* Pricing */}
                     <div className="mb-6">
-                      <p className="text-sm ">
+                      <p className="text-sm">
                         Từ{" "}
                         <span className="font-semibold">
                           ${product.price.toFixed(2)}
@@ -162,7 +153,6 @@ const IPhoneDetail = async ({ params }: { params: { id: string } }) => {
                       </p>
                     </div>
 
-                    {/* Action Buttons */}
                     <div className="flex gap-3">
                       <Button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-full text-sm py-5">
                         Mua ngay
@@ -180,11 +170,10 @@ const IPhoneDetail = async ({ params }: { params: { id: string } }) => {
             ))}
           </div>
 
-          {/* Show message if no products */}
           {(!idDb?.products || idDb.products.length === 0) && (
             <div className="text-center py-12">
               <p className="text-gray-500 text-lg">
-                Chưa có sản phẩm iPhone nào trong hệ thống
+                Chưa có sản phẩm iPad nào trong hệ thống
               </p>
             </div>
           )}
@@ -193,11 +182,11 @@ const IPhoneDetail = async ({ params }: { params: { id: string } }) => {
 
       <Separator className="my-12" />
 
-      {/* Section 1: Khám Phá Dòng iPhone */}
+      {/* Section 1: Tìm Hiểu iPad */}
       <section className="w-full py-12 md:py-20">
         <div className="max-w-[1440px] mx-auto px-4">
           <h2 className="text-[40px] md:text-[56px] font-semibold mb-8 md:mb-12 leading-[1.07143] tracking-tight">
-            {menuIPhoneInfo[0].title}
+            {menuIPadInfo[0].title}
           </h2>
 
           {/* Horizontal Scroll Cards */}
@@ -206,32 +195,35 @@ const IPhoneDetail = async ({ params }: { params: { id: string } }) => {
               className="flex gap-4 md:gap-6"
               style={{ width: "max-content" }}
             >
-              {menuIPhoneInfo[0].cards?.map((card, index) => (
-                <Link
-                  href={card.imageUrl}
-                  key={index}
-                  className="group relative flex-shrink-0 w-[340px] md:w-[405px] h-[580px] md:h-[700px] rounded-[28px] overflow-hidden bg-[#F5F5F7]"
-                >
-                  <div className="relative w-full h-full">
-                    <Image
-                      src={card.imageUrl || "/placeholder.jpg"}
-                      alt={card.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                  </div>
+              <SmoothScrollContainer>
+                {" "}
+                {menuIPadInfo[0].cards?.map((card, index) => (
+                  <Link
+                    href={card.imageUrl}
+                    key={index}
+                    className="group relative flex-shrink-0 w-[340px] md:w-[405px] h-[580px] md:h-[700px] rounded-[28px] overflow-hidden bg-[#F5F5F7]"
+                  >
+                    <div className="relative w-full h-full">
+                      <Image
+                        src={`https://www.apple.com/v/ipad/home/ck/images/overview/select/product-tile/pt_ipad_pro__6bgrkek0jnm2_large.png`}
+                        alt={card.title}
+                        fill
+                        className="object-contain transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                    </div>
 
-                  <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
-                    <h3 className="text-[24px] md:text-[28px] font-semibold leading-[1.14286] mb-2">
-                      {card.title}
-                    </h3>
-                    <p className="text-[17px] md:text-[19px] leading-[1.42105] opacity-90 whitespace-pre-line">
-                      {card.description}
-                    </p>
-                  </div>
-                </Link>
-              ))}
+                    <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
+                      <h3 className="text-[24px] md:text-[28px] font-semibold leading-[1.14286] mb-2">
+                        {card.title}
+                      </h3>
+                      <p className="text-[17px] md:text-[19px] leading-[1.42105] opacity-90 whitespace-pre-line">
+                        {card.description}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+              </SmoothScrollContainer>
             </div>
           </div>
         </div>
@@ -239,18 +231,18 @@ const IPhoneDetail = async ({ params }: { params: { id: string } }) => {
 
       <Separator className="my-12" />
 
-      {/* Section 2: Công Nghệ Đột Phá */}
+      {/* Section 2: iPad Làm Được Gì */}
       <section className="w-full py-12 md:py-20">
         <div className="max-w-[1440px] mx-auto px-4">
           <h2 className="text-[40px] md:text-[56px] font-semibold mb-8 md:mb-12 leading-[1.07143] tracking-tight">
-            {menuIPhoneInfo[1].title}
+            {menuIPadInfo[1].title}
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            {menuIPhoneInfo[1].cards?.map((card, index) => (
+          <div className="grid md:grid-cols-2 gap-4 md:gap-6">
+            {menuIPadInfo[1].cards?.map((card, index) => (
               <div
                 key={index}
-                className="relative rounded-[28px] overflow-hidden bg-[#F5F5F7] p-8 md:p-12 min-h-[400px] flex flex-col justify-end hover:shadow-xl transition-shadow duration-300"
+                className="relative rounded-[28px] overflow-hidden bg-[#F5F5F7] p-8 md:p-12 min-h-[400px] md:min-h-[500px] flex flex-col justify-end"
               >
                 <h3 className="text-[28px] md:text-[32px] font-semibold leading-[1.125] mb-4">
                   {card.title}
@@ -279,82 +271,60 @@ const IPhoneDetail = async ({ params }: { params: { id: string } }) => {
 
       <Separator className="my-12" />
 
-      {/* Section 3: iPhone Và Hệ Sinh Thái */}
-      <section className="w-full py-12 md:py-20">
-        <div className="max-w-[1440px] mx-auto px-4">
-          <h2 className="text-[40px] md:text-[56px] font-semibold mb-8 md:mb-12 leading-[1.07143] tracking-tight">
-            {menuIPhoneInfo[2].title}
-          </h2>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {menuIPhoneInfo[2].cards?.map((card, index) => (
-              <div
-                key={index}
-                className="relative rounded-[28px] overflow-hidden bg-[#F5F5F7] p-8 min-h-[350px] flex flex-col justify-end"
-              >
-                <h3 className="text-[24px] font-semibold leading-[1.16667] mb-3">
-                  {card.title}
-                </h3>
-                <p className="text-[14px] md:text-[17px] leading-[1.47059] text-gray-700">
-                  {card.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <Separator className="my-12" />
-
-      {/* Section 4: Tại Sao Chọn iPhone */}
+      {/* Section 3: Tại Sao Chọn iPad */}
       <section className="w-full py-12 md:py-20 bg-white">
         <div className="max-w-[1440px] mx-auto px-4">
           <h2 className="text-[40px] md:text-[56px] font-semibold mb-8 md:mb-16 leading-[1.07143] tracking-tight text-center">
-            {menuIPhoneInfo[4].title}
+            {menuIPadInfo[3].title}
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-            {menuIPhoneInfo[4].WhyIPhoneCards?.map((card, index) => (
-              <div key={index} className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 mb-4 text-gray-600">
-                  {iconMap[card.icon] || <Smartphone className="w-12 h-12" />}
+          <div className="flex gap-8 md:gap-12 overflow-x-scroll">
+            <SmoothScrollContainer>
+              {menuIPadInfo[3].WhyIPadCards?.map((card, index) => (
+                <div
+                  key={index}
+                  className="text-center min-w-[344px] py-4 px-8 min-h-[312px] rounded-2xl bg-[#F5F5F7]"
+                >
+                  <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 mb-4 text-gray-600">
+                    {iconMap[card.icon] || <Tablet className="w-12 h-12" />}
+                  </div>
+                  <h3 className="text-[21px] md:text-[24px] font-semibold leading-[1.16667] mb-3">
+                    {card.title}
+                  </h3>
+                  <p className="text-[14px] md:text-[17px] leading-[1.47059] text-gray-600 max-w-[340px] mx-auto">
+                    {card.description}
+                  </p>
                 </div>
-                <h3 className="text-[21px] md:text-[24px] font-semibold leading-[1.16667] mb-3">
-                  {card.title}
-                </h3>
-                <p className="text-[14px] md:text-[17px] leading-[1.47059] text-gray-600 max-w-[340px] mx-auto">
-                  {card.description}
-                </p>
-              </div>
-            ))}
+              ))}
+            </SmoothScrollContainer>
           </div>
         </div>
       </section>
 
       <Separator className="my-12" />
 
-      {/* Section 5: Phụ Kiện iPhone */}
+      {/* Section 4: Phụ Kiện iPad */}
       <section className="w-full py-12 md:py-20">
         <div className="max-w-[1440px] mx-auto px-4">
           <h2 className="text-[40px] md:text-[56px] font-semibold mb-8 md:mb-12 leading-[1.07143] tracking-tight">
-            {menuIPhoneInfo[5].title}
+            {menuIPadInfo[4].title}
           </h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-            {menuIPhoneInfo[5].cards?.map((card, index) => (
+          <div className="grid md:grid-cols-2 gap-4 md:gap-6 ">
+            {menuIPadInfo[4].cards?.map((card, index) => (
               <Link
                 href={card.imageUrl}
                 key={index}
-                className="group relative rounded-[28px] overflow-hidden bg-[#F5F5F7] min-h-[400px] flex flex-col justify-end p-8 hover:shadow-2xl transition-shadow duration-300"
+                className="group relative rounded-[28px] overflow-hidden bg-[#F5F5F7] min-h-[400px] md:min-h-[500px] flex flex-col justify-end p-8 md:p-12 hover:shadow-2xl transition-shadow duration-300"
               >
-                <h3 className="text-[21px] md:text-[24px] font-semibold leading-[1.16667] mb-3">
+                <h3 className="text-[28px] md:text-[32px] font-semibold leading-[1.125] mb-3">
                   {card.title}
                 </h3>
-                <p className="text-[14px] md:text-[17px] leading-[1.47059] text-gray-700 mb-6">
+                <p className="text-[17px] md:text-[19px] leading-[1.47059] text-gray-700 mb-6">
                   {card.description}
                 </p>
                 <div className="text-[#0066CC] text-[17px] inline-flex items-center">
-                  Mua ngay
+                  Tìm hiểu thêm
                   <svg
                     className="ml-2 w-4 h-4"
                     fill="currentColor"
@@ -369,124 +339,168 @@ const IPhoneDetail = async ({ params }: { params: { id: string } }) => {
         </div>
       </section>
 
+      {/* Help Me Choose Section */}
+      <section className="w-full py-12 md:py-20 bg-[#F5F5F7]">
+        <div className="max-w-[980px] mx-auto px-4 text-center">
+          <h2 className="text-[40px] md:text-[56px] font-semibold mb-6 leading-[1.07143] tracking-tight">
+            Cần trợ giúp chọn iPad của bạn?
+          </h2>
+          <p className="text-[19px] md:text-[21px] leading-[1.381] text-gray-700 mb-8">
+            Trả lời một vài câu hỏi và chúng tôi sẽ giúp bạn tìm iPad phù hợp
+            nhất.
+          </p>
+          <Button
+            size="lg"
+            className="bg-[#0066CC] hover:bg-[#0055B3] text-white px-8 py-6 rounded-full text-[17px] font-medium"
+          >
+            Bắt đầu
+          </Button>
+        </div>
+      </section>
+
       {/* Bottom Spacer */}
       <div className="h-12 md:h-20"></div>
 
       {/* Footer Navigation Section */}
       <footer className="w-full bg-[#F5F5F7] py-12 md:py-16">
-        <div className="max-w-[980px] flex flex-col pl-10">
+        <div className="max-w-[980px] pl-10 px-4">
           <h2 className="text-[40px] md:text-[56px] font-semibold mb-8 md:mb-12 leading-[1.05] tracking-tight">
-            iPhone
+            iPad
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 font-semibold">
-            {/* Column 1: Khám Phá iPhone */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 font-semibold text-[24px]">
+            {/* Column 1: Khám Phá iPad */}
             <div className="space-y-3">
               <h3 className="text-[30px] font-semibold text-gray-500 mb-4">
-                Khám Phá iPhone
+                Khám Phá iPad
               </h3>
               <ul className="space-y-3 text-[14px]">
                 <li>
-                  <Link href="/iphone" className=" hover:underline">
-                    Khám Phá Tất Cả iPhone
+                  <Link href="/ipad" className="hover:underline">
+                    Khám Phá Tất Cả iPad
                   </Link>
                 </li>
                 <li>
-                  <Link href="/iphone-15-pro" className=" hover:underline">
-                    iPhone 15 Pro
+                  <Link href="/ipad-pro" className="hover:underline">
+                    iPad Pro
                   </Link>
                 </li>
                 <li>
-                  <Link href="/iphone-15" className=" hover:underline">
-                    iPhone 15
+                  <Link href="/ipad-air" className="hover:underline">
+                    iPad Air
                   </Link>
                 </li>
                 <li>
-                  <Link href="/iphone-14" className=" hover:underline">
-                    iPhone 14
+                  <Link href="/ipad-10-9" className="hover:underline">
+                    iPad
                   </Link>
                 </li>
                 <li>
-                  <Link href="/iphone-se" className=" hover:underline">
-                    iPhone SE
+                  <Link href="/ipad-mini" className="hover:underline">
+                    iPad mini
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/apple-pencil" className="hover:underline">
+                    Apple Pencil
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/ipad-keyboards" className="hover:underline">
+                    Bàn Phím
                   </Link>
                 </li>
               </ul>
               <div className="pt-4 space-y-3 text-[14px]">
                 <p>
-                  <Link href="/iphone/compare" className=" hover:underline">
-                    So Sánh iPhone
+                  <Link href="/ipad/compare" className="hover:underline">
+                    So Sánh iPad
                   </Link>
                 </p>
                 <p>
-                  <Link href="/iphone/switch" className=" hover:underline">
-                    Chuyển Sang iPhone
+                  <Link href="/ipad/why-ipad" className="hover:underline">
+                    Tại Sao Chọn iPad
                   </Link>
                 </p>
               </div>
             </div>
 
-            {/* Column 2: Mua iPhone */}
+            {/* Column 2: Mua iPad */}
             <div className="space-y-3">
               <h3 className="text-[30px] font-semibold text-gray-500 mb-4">
-                Mua iPhone
+                Mua iPad
               </h3>
               <ul className="space-y-3 text-[14px]">
                 <li>
-                  <Link href="/shop/iphone" className=" hover:underline">
-                    Mua iPhone
+                  <Link href="/shop/ipad" className="hover:underline">
+                    Mua iPad
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="/shop/iphone/accessories"
-                    className=" hover:underline"
+                    href="/shop/ipad/accessories"
+                    className="hover:underline"
                   >
-                    Phụ Kiện iPhone
+                    Phụ Kiện iPad
                   </Link>
                 </li>
                 <li>
-                  <Link href="/apple-card" className=" hover:underline">
-                    Apple Card
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/trade-in" className=" hover:underline">
+                  <Link href="/trade-in" className="hover:underline">
                     Apple Trade In
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/financing" className="hover:underline">
+                    Tài Chính
                   </Link>
                 </li>
               </ul>
             </div>
 
-            {/* Column 3: Tìm Hiểu Thêm */}
+            {/* Column 3: Tìm Hiểu Thêm Về iPad */}
             <div className="space-y-3">
               <h3 className="text-[30px] font-semibold text-gray-500 mb-4">
-                Tìm Hiểu Thêm
+                Tìm Hiểu Thêm Về iPad
               </h3>
               <ul className="space-y-3 text-[14px]">
                 <li>
-                  <Link href="/iphone/support" className=" hover:underline">
-                    Hỗ Trợ iPhone
+                  <Link href="/ipad/support" className="hover:underline">
+                    Hỗ Trợ iPad
                   </Link>
                 </li>
                 <li>
-                  <Link href="/applecare" className=" hover:underline">
-                    AppleCare+ cho iPhone
+                  <Link href="/applecare" className="hover:underline">
+                    AppleCare+
                   </Link>
                 </li>
                 <li>
-                  <Link href="/ios" className=" hover:underline">
-                    iOS 18
+                  <Link href="/ipados" className="hover:underline">
+                    iPadOS
                   </Link>
                 </li>
                 <li>
-                  <Link href="/apple-intelligence" className=" hover:underline">
+                  <Link href="/apple-intelligence" className="hover:underline">
                     Apple Intelligence
                   </Link>
                 </li>
                 <li>
-                  <Link href="/iphone/privacy" className=" hover:underline">
-                    Quyền Riêng Tư
+                  <Link href="/ipad/apps" className="hover:underline">
+                    Ứng Dụng Cho iPad
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/icloud" className="hover:underline">
+                    iCloud+
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/education/ipad" className="hover:underline">
+                    iPad Cho Giáo Dục
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/business/ipad" className="hover:underline">
+                    iPad Cho Doanh Nghiệp
                   </Link>
                 </li>
               </ul>
@@ -498,4 +512,4 @@ const IPhoneDetail = async ({ params }: { params: { id: string } }) => {
   );
 };
 
-export default IPhoneDetail;
+export default IPadDetail;

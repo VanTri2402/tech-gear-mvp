@@ -5,37 +5,44 @@ export const menuWatchInfo = [
       {
         title: "Apple Watch Series 9",
         description: "Chip S9 mạnh mẽ.\nMàn hình sáng gấp đôi.",
-        imageUrl: "https://www.apple.com/vn/apple-watch-series-9/",
+        imageUrl:
+          "https://images.unsplash.com/photo-1434493907317-a46b5bbe7834?w=800&h=1000&fit=crop",
       },
       {
         title: "Apple Watch Ultra 2",
         description: "Phiêu lưu khắp nơi.\nBền bỉ tột đỉnh.",
-        imageUrl: "https://www.apple.com/vn/apple-watch-ultra-2/",
+        imageUrl:
+          "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=800&h=1000&fit=crop",
       },
       {
         title: "Apple Watch SE",
         description: "Đầy đủ tính năng.\nGiá trị tuyệt vời.",
-        imageUrl: "https://www.apple.com/vn/apple-watch-se/",
+        imageUrl:
+          "https://images.unsplash.com/photo-1510017098667-27dfc7150acb?w=800&h=1000&fit=crop",
       },
       {
         title: "watchOS 11",
         description: "Thông minh hơn với sức khỏe.\nCá nhân hóa hơn.",
-        imageUrl: "https://www.apple.com/vn/watchos/",
+        imageUrl:
+          "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=800&h=1000&fit=crop",
       },
       {
         title: "Apple Watch Nike",
         description: "Người bạn chạy bộ.\nLuyện tập tối ưu.",
-        imageUrl: "https://www.apple.com/vn/apple-watch-nike/",
+        imageUrl:
+          "https://images.unsplash.com/photo-1523395243481-163f8f6155ab?w=800&h=1000&fit=crop",
       },
       {
         title: "Apple Watch Hermès",
         description: "Thời trang cao cấp.\nCông nghệ tinh tế.",
-        imageUrl: "https://www.apple.com/vn/apple-watch-hermes/",
+        imageUrl:
+          "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&h=1000&fit=crop",
       },
       {
         title: "Dây Đeo Apple Watch",
         description: "Hàng trăm phong cách.\nThể hiện cá tính.",
-        imageUrl: "https://www.apple.com/vn/shop/watch/bands",
+        imageUrl:
+          "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=800&h=1000&fit=crop",
       },
     ],
   },
@@ -46,37 +53,37 @@ export const menuWatchInfo = [
         title: "Theo Dõi Nhịp Tim",
         description:
           "Đo nhịp tim liên tục cả ngày. Cảnh báo nhịp tim cao và thấp. Thông báo nhịp không đều. ECG bất cứ lúc nào để phát hiện AFib.",
-        imageUrl: "https://www.apple.com/vn/watch/?focus=health",
+        imageUrl: "#heart",
       },
       {
         title: "Đo Oxy Trong Máu",
         description:
           "Đo nồng độ oxy trong máu chỉ trong 15 giây. Theo dõi xu hướng theo thời gian. Hiểu rõ sức khỏe tổng thể. Hữu ích cho người leo núi và vận động viên.",
-        imageUrl: "https://www.apple.com/vn/watch/?focus=blood-oxygen",
+        imageUrl: "#oxygen",
       },
       {
         title: "Theo Dõi Giấc Ngủ",
         description:
           "Giai đoạn giấc ngủ chi tiết (REM, Core, Deep). Nhịp tim và nhịp thở khi ngủ. Tạo lịch trình ngủ. So sánh với mục tiêu giấc ngủ.",
-        imageUrl: "https://www.apple.com/vn/watch/?focus=sleep",
+        imageUrl: "#sleep",
       },
       {
         title: "Phát Hiện Té Ngã Và Va Chạm",
         description:
           "Tự động gọi khẩn cấp khi té ngã nặng. Phát hiện va chạm xe nghiêm trọng. Gửi vị trí cho liên hệ khẩn cấp. An tâm cho bạn và gia đình.",
-        imageUrl: "https://www.apple.com/vn/watch/?focus=safety",
+        imageUrl: "#safety",
       },
       {
         title: "Chu Kỳ Kinh Nguyệt",
         description:
           "Theo dõi chu kỳ và dự đoán kỳ kinh nguyệt. Ghi lại triệu chứng. Nhắc nhở uống thuốc. Thông tin sức khỏe sinh sản toàn diện.",
-        imageUrl: "https://www.apple.com/vn/watch/?focus=cycle-tracking",
+        imageUrl: "#cycle",
       },
       {
         title: "Nhiệt Độ Cổ Tay",
         description:
           "Cảm biến nhiệt độ theo dõi thay đổi nhiệt độ cơ thể. Hữu ích cho lập kế hoạch gia đình. Hiểu rõ sức khỏe tổng thể hơn.",
-        imageUrl: "https://www.apple.com/vn/watch/?focus=temperature",
+        imageUrl: "#temp",
       },
     ],
   },
@@ -87,19 +94,19 @@ export const menuWatchInfo = [
         title: "Vòng Hoạt Động",
         description:
           "Di Chuyển, Luyện Tập, Đứng - ba vòng mỗi ngày. Tạo động lực mỗi ngày. Chia sẻ với bạn bè. Thi đua lành mạnh.",
-        imageUrl: "https://www.apple.com/vn/watch/?focus=activity",
+        imageUrl: "#activity",
       },
       {
         title: "Hơn 100 Bài Tập",
         description:
           "Từ yoga, đạp xe, bơi lội đến HIIT. Số liệu chính xác cho từng bài tập. Tự động phát hiện bài tập. Tích hợp Apple Fitness+.",
-        imageUrl: "https://www.apple.com/vn/watch/?focus=workouts",
+        imageUrl: "#workouts",
       },
       {
         title: "Chạy Bộ Nâng Cao",
         description:
           "Nhịp chạy, sải chân, độ cao. Vùng nhịp tim tối ưu. Đo công suất khi chạy. Phát hiện chạy ngoài trời tự động.",
-        imageUrl: "https://www.apple.com/vn/watch/?focus=running",
+        imageUrl: "#running",
       },
     ],
   },
@@ -192,37 +199,37 @@ export const menuWatchInfo = [
         title: "Sport Band",
         description:
           "Fluoroelastomer bền, mềm. Thoáng khí, chống mồ hôi. Hơn 20 màu sắc. Pin-and-tuck closure.",
-        imageUrl: "https://www.apple.com/vn/shop/watch/bands/sport-bands",
+        imageUrl: "#sportband",
       },
       {
         title: "Sport Loop",
         description:
           "Vải nylon mềm, thoáng. Điều chỉnh linh hoạt. Đa dạng màu sắc. Nhẹ và thoải mái.",
-        imageUrl: "https://www.apple.com/vn/shop/watch/bands/sport-loop",
+        imageUrl: "#sportloop",
       },
       {
         title: "Milanese Loop",
         description:
           "Thép không gỉ mắt lưới. Khóa từ tính mượt mà. Sang trọng, thanh lịch. Điều chỉnh hoàn hảo.",
-        imageUrl: "https://www.apple.com/vn/shop/watch/bands/milanese-loop",
+        imageUrl: "#milanese",
       },
       {
         title: "Leather Link",
         description:
           "Da cao cấp từ Châu Âu. Nam châm linh hoạt. Ôm sát cổ tay. Phong cách cổ điển.",
-        imageUrl: "https://www.apple.com/vn/shop/watch/bands/leather",
+        imageUrl: "#leather",
       },
       {
         title: "Braided Solo Loop",
         description:
           "Thiết kế liền mạch, không khóa. 100% sợi tái chế. Co giãn thoải mái. Chọn size chính xác.",
-        imageUrl: "https://www.apple.com/vn/shop/watch/bands/braided-solo-loop",
+        imageUrl: "#braided",
       },
       {
         title: "Ocean Band",
         description:
           "Thiết kế cho Apple Watch Ultra. Molded loops linh hoạt. Khóa titan. Chống nước hoàn toàn.",
-        imageUrl: "https://www.apple.com/vn/shop/watch/bands/ocean-band",
+        imageUrl: "#ocean",
       },
     ],
   },
@@ -233,25 +240,25 @@ export const menuWatchInfo = [
         title: "Làm Việc Thông Minh",
         description:
           "Nhận thông báo email, tin nhắn. Trả lời nhanh bằng giọng nói. Nhắc nhở cuộc họp. Calendar trên cổ tay.",
-        imageUrl: "https://www.apple.com/vn/watch/?focus=productivity",
+        imageUrl: "#productivity",
       },
       {
         title: "Thanh Toán Apple Pay",
         description:
           "Thanh toán không tiếp xúc siêu nhanh. Chỉ cần đưa cổ tay lên máy POS. An toàn với Touch ID. Không cần ví và thẻ.",
-        imageUrl: "https://www.apple.com/vn/watch/?focus=apple-pay",
+        imageUrl: "#applepay",
       },
       {
         title: "Nghe Nhạc Và Podcast",
         description:
           "75 triệu bài hát Apple Music. Stream trực tiếp với Cellular. Đồng bộ playlist offline. Điều khiển AirPods.",
-        imageUrl: "https://www.apple.com/vn/watch/?focus=music",
+        imageUrl: "#music",
       },
       {
         title: "Điều Khiển Nhà Thông Minh",
         description:
           "Bật đèn, khóa cửa, điều chỉnh nhiệt độ. HomeKit tích hợp. Tạo cảnh tự động. Điều khiển từ cổ tay.",
-        imageUrl: "https://www.apple.com/vn/watch/?focus=home",
+        imageUrl: "#home",
       },
     ],
   },
@@ -262,30 +269,13 @@ export const menuWatchInfo = [
         title: "Tập Luyện Mọi Lúc Mọi Nơi",
         description:
           "Hơn 3000 bài tập từ huấn luyện viên chuyên nghiệp. HIIT, Yoga, Cycling, Dance, Strength. Âm nhạc động lực. Bài tập mới mỗi tuần.",
-        imageUrl: "https://www.apple.com/vn/apple-fitness-plus/",
+        imageUrl: "#fitness",
       },
       {
         title: "Time To Walk",
         description:
           "Podcast đi bộ truyền cảm hứng. Nghe câu chuyện từ người nổi tiếng. Âm nhạc đặc biệt. Động lực đi bộ mỗi ngày.",
-        imageUrl: "https://www.apple.com/vn/apple-fitness-plus/",
-      },
-    ],
-  },
-  {
-    title: "Apple Watch Cho Gia Đình",
-    cards: [
-      {
-        title: "Thiết Lập Gia Đình",
-        description:
-          "Thiết lập Apple Watch cho con bạn mà không cần iPhone. Gọi điện, nhắn tin với gia đình. GPS theo dõi vị trí an toàn. Quản lý từ iPhone của bạn.",
-        imageUrl: "https://www.apple.com/vn/watch/?focus=family-setup",
-      },
-      {
-        title: "Schooltime",
-        description:
-          "Hạn chế phân tâm khi học. Chỉ hiển thị mặt đồng hồ đơn giản. Ứng dụng và thông báo bị giới hạn. Phụ huynh kiểm soát hoàn toàn.",
-        imageUrl: "https://www.apple.com/vn/watch/?focus=schooltime",
+        imageUrl: "#timetowalk",
       },
     ],
   },

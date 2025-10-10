@@ -11,7 +11,7 @@ export async function NavigationMenu() {
   const user = await getUserData();
 
   return (
-    <ShadcnNavigationMenu>
+    <ShadcnNavigationMenu className="z-50">
       <NavLinksClient categories={categories} user={user} />
     </ShadcnNavigationMenu>
   );
