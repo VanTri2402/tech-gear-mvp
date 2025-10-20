@@ -5,37 +5,44 @@ export const menuIPadInfo = [
       {
         title: "iPad Pro",
         description: "Hiệu năng tối thượng.\nKhông giới hạn sáng tạo.",
-        imageUrl: "https://www.apple.com/vn/ipad-pro/",
+        imageUrl:
+          "https://images.unsplash.com/photo-1587033411391-5d9e51cce126?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aXBhZCUyMHByb3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=700",
       },
       {
         title: "iPad Air",
         description: "Mạnh mẽ nghiêm túc.\nNhẹ nhàng đáng kinh ngạc.",
-        imageUrl: "https://www.apple.com/vn/ipad-air/",
+        imageUrl:
+          "https://images.unsplash.com/photo-1630331528526-7d04c6eb463f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aXBhZCUyMGFpcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600",
       },
       {
         title: "iPad",
         description: "Đầy đủ iPad.\nĐầy đủ tuyệt vời.",
-        imageUrl: "https://www.apple.com/vn/ipad-10.9/",
+        imageUrl:
+          "https://plus.unsplash.com/premium_photo-1680615470480-4f96d7882a62?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGlwYWQlMjBzZXJpZXN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600",
       },
       {
         title: "iPad mini",
         description: "Thật nhiều iPad.\nThật ít kích thước.",
-        imageUrl: "https://www.apple.com/vn/ipad-mini/",
+        imageUrl:
+          "https://images.unsplash.com/photo-1679759799183-8899c0d67b43?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aXBhZCUyMG1pbmklMjBhcHBsZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600",
       },
       {
         title: "Apple Pencil",
         description: "Viết nên ý tưởng của bạn.",
-        imageUrl: "https://www.apple.com/vn/apple-pencil/",
+        imageUrl:
+          "https://images.unsplash.com/photo-1594200664133-0ee987e1babf?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXBwbGUlMjBwZW5jaWx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600",
       },
       {
         title: "Bàn Phím Magic Keyboard",
         description: "Trải nghiệm gõ phím tuyệt hảo.",
-        imageUrl: "https://www.apple.com/vn/ipad-keyboards/",
+        imageUrl:
+          "https://images.unsplash.com/photo-1608377205627-ae97b46989f4?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXBwbGUlMjBNYWdpYyUyMEtleWJvYXJkfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600",
       },
       {
         title: "iPadOS",
         description: "Mạnh mẽ. Dễ sử dụng.\nĐa năng.",
-        imageUrl: "https://www.apple.com/vn/ipados/",
+        imageUrl:
+          "https://images.unsplash.com/photo-1627372129933-9abc19b91f21?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGFwcGxlJTIwSXBhZG9zfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600",
       },
     ],
   },
@@ -46,19 +53,22 @@ export const menuIPadInfo = [
         title: "Sáng Tạo Và Làm Việc",
         description:
           "Từ chỉnh sửa ảnh chuyên nghiệp đến thiết kế 3D, iPad Pro với chip M2 xử lý mọi tác vụ một cách mượt mà. Màn hình Liquid Retina XDR mang đến màu sắc sống động và độ tương phản tuyệt đối.",
-        imageUrl: "https://www.apple.com/vn/ipad/?focus=creativity",
+        imageUrl:
+          "https://images.unsplash.com/photo-1588876315093-ce09afb34028?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGlwYWQlMjBhcHBsZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600",
       },
       {
         title: "Học Tập Và Nghiên Cứu",
         description:
           "iPad là người bạn đồng hành hoàn hảo cho học tập. Ghi chú bằng Apple Pencil, đọc sách điện tử, tham gia lớp học trực tuyến - tất cả trong một thiết bị nhẹ nhàng.",
-        imageUrl: "https://www.apple.com/vn/ipad/?focus=education",
+        imageUrl:
+          "https://plus.unsplash.com/premium_photo-1661479570103-35c846d10e23?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fGlwYWQlMjBhcHBsZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600",
       },
       {
         title: "Giải Trí Đỉnh Cao",
         description:
           "Xem phim với màn hình Retina tuyệt đẹp, chơi game với đồ họa đỉnh cao, nghe nhạc với âm thanh vòm. iPad biến mọi khoảnh khắc thành trải nghiệm đáng nhớ.",
-        imageUrl: "https://www.apple.com/vn/ipad/?focus=entertainment",
+        imageUrl:
+          "https://images.unsplash.com/photo-1643902534396-96dd62c03e9a?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTh8fGlwYWQlMjBhcHBsZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600",
       },
     ],
   },
@@ -161,26 +171,29 @@ export const menuIPadInfo = [
         title: "Apple Pencil Pro",
         description:
           "Apple Pencil thế hệ mới nhất với cảm biến vắt và con lăn xúc giác, mang đến trải nghiệm viết vẽ chân thực hơn bao giờ hết.",
-        imageUrl: "https://www.apple.com/vn/apple-pencil/",
+        imageUrl:
+          "https://images.unsplash.com/photo-1624803903001-c119021a6d9d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8QXBwbGUlMjBQZW5jaWwlMjBQcm98ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=400",
       },
       {
         title: "Magic Keyboard",
         description:
           "Bàn phím gõ phím tuyệt vời với trackpad. Biến iPad thành laptop hoàn chỉnh.",
-        imageUrl: "https://www.apple.com/vn/ipad-keyboards/",
+        imageUrl:
+          "https://images.unsplash.com/photo-1635695355251-00868b8bdf06?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjR8fE1hZ2ljJTIwS2V5Ym9hcmQlMjBhcHBsZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=400",
       },
       {
         title: "Smart Folio",
         description:
           "Bảo vệ cả mặt trước và mặt sau iPad. Tự động đánh thức và cho ngủ thiết bị.",
         imageUrl:
-          "https://www.apple.com/vn/shop/ipad/accessories/cases-protection",
+          "https://images.unsplash.com/photo-1585789217494-0b4580e7bc7a?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8U21hcnQlMjBGb2xpbyUyMGFwcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=400",
       },
       {
         title: "AirPods Pro",
         description:
           "Âm thanh không gian với tính năng theo dõi chuyển động đầu. Trải nghiệm âm thanh vòm đỉnh cao.",
-        imageUrl: "https://www.apple.com/vn/airpods-pro/",
+        imageUrl:
+          "https://images.unsplash.com/photo-1591386618629-4ef48ffdc0c4?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1470",
       },
     ],
   },
@@ -191,13 +204,15 @@ export const menuIPadInfo = [
         title: "Doanh Nghiệp",
         description:
           "Triển khai iPad cho đội ngũ của bạn với Apple Business Manager. Bảo mật cấp doanh nghiệp và quản lý thiết bị từ xa.",
-        imageUrl: "https://www.apple.com/vn/business/",
+        imageUrl:
+          "https://plus.unsplash.com/premium_photo-1661589377988-a07529c25420?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fEJ1c2luZXNzJTIwYXBwbGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=400",
       },
       {
         title: "Giáo Dục",
         description:
           "iPad giúp học sinh học tập theo cách mới. Với Apple School Manager, giáo viên dễ dàng quản lý lớp học.",
-        imageUrl: "https://www.apple.com/vn/education/",
+        imageUrl:
+          " https://images.unsplash.com/photo-1702144418583-db89bc40c33d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGVkdWNhdGlvbiUyMGFwcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=400",
       },
     ],
   },

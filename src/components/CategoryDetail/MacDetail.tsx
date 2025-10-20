@@ -15,6 +15,7 @@ import {
   Tag,
 } from "lucide-react";
 import { MacTopNav } from "../ComponentDetailCategories/Nav";
+import { SmoothScrollContainer } from "../ComponentDetailCategories/smooth";
 
 // Icon mapping for Why Mac section
 const iconMap: { [key: string]: React.ReactNode } = {
@@ -94,38 +95,37 @@ const MacDetail = async ({ params }: { params: { id: string } }) => {
           </h2>
 
           {/* Horizontal Scroll Cards */}
-          <div className=" pb-6 -mx-4 px-4">
-            <div
-              className="flex gap-4 md:gap-6"
-              style={{ width: "max-content" }}
-            >
-              {menuMacInfo[0].cards?.map((card, index) => (
-                <Link
-                  href={card.imageUrl}
-                  key={index}
-                  className="group relative flex-shrink-0 w-[340px] md:w-[405px] h-[580px] md:h-[700px] rounded-[28px] overflow-hidden bg-[#F5F5F7]"
-                >
-                  <div className="relative w-full h-full">
-                    <img
-                      src={card.imageUrl || "/placeholder-mac.jpg"} // Cần thay bằng URL ảnh phù hợp
-                      alt={card.title}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                  </div>
+          <div className=" pb-6 overflow-x-auto scrollbar-hide">
+            <SmoothScrollContainer>
+              <div className="flex gap-4 md:gap-6">
+                {menuMacInfo[0].cards?.map((card, index) => (
+                  <Link
+                    href={card.imageUrl}
+                    key={index}
+                    className="group relative flex-shrink-0 w-[340px] md:w-[405px] h-[580px] md:h-[700px] rounded-[28px] overflow-hidden bg-[#F5F5F7]"
+                  >
+                    <div className="relative w-full h-full">
+                      <img
+                        src={card.imageUrl || "/placeholder-mac.jpg"} // Cần thay bằng URL ảnh phù hợp
+                        alt={card.title}
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                    </div>
 
-                  <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
-                    <h3 className="text-[24px] md:text-[28px] font-semibold leading-[1.14286] mb-2">
-                      {card.title}
-                    </h3>
-                    <p className="text-[17px] md:text-[19px] leading-[1.42105] opacity-90 whitespace-pre-line">
-                      {card.description}
-                    </p>
-                  </div>
-                </Link>
-              ))}
-            </div>
+                    <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
+                      <h3 className="text-[24px] md:text-[28px] font-semibold leading-[1.14286] mb-2">
+                        {card.title}
+                      </h3>
+                      <p className="text-[17px] md:text-[19px] leading-[1.42105] opacity-90 whitespace-pre-line">
+                        {card.description}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </SmoothScrollContainer>
           </div>
         </div>
       </section>
@@ -143,27 +143,42 @@ const MacDetail = async ({ params }: { params: { id: string } }) => {
             {menuMacInfo[1].cards?.map((card, index) => (
               <div
                 key={index}
-                className="relative rounded-[28px] overflow-hidden bg-[#F5F5F7] p-8 md:p-12 min-h-[400px] md:min-h-[500px] flex flex-col justify-end"
+                // Container chính: relative để tạo stacking context
+                className="relative rounded-[28px] overflow-hidden min-h-[400px] md:min-h-[500px] group hover:shadow-xl transition-shadow duration-300 flex" // Giữ flex, không cần flex-col ở đây
               >
-                <h3 className="text-[28px] md:text-[32px] font-semibold leading-[1.125] mb-4">
-                  {card.title}
-                </h3>
-                <p className="text-[17px] md:text-[19px] leading-[1.47059] text-gray-700 mb-6">
-                  {card.description}
-                </p>
-                <Link
-                  href={card.imageUrl}
-                  className="text-[#0066CC] text-[17px] hover:underline inline-flex items-center"
-                >
-                  Tìm hiểu thêm
-                  <svg
-                    className="ml-2 w-4 h-4"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
+                {/* Ảnh nền */}
+                <img
+                  src={card.imageUrl}
+                  alt={card.title}
+                  // Ảnh nằm tuyệt đối, lấp đầy container, z-index thấp nhất TRONG card này
+                  className="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-105 transition-transform duration-500" // Đổi -z-10 thành z-0
+                />
+                {/* Lớp phủ Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent z-10"></div>{" "}
+                {/* Đặt z-10 */}
+                {/* Container nội dung: relative để nổi lên trên, padding, flex để đẩy xuống */}
+                <div className="relative z-20 p-8 md:p-12 flex flex-col justify-end flex-grow text-gray-50 w-full">
+                  {/* Đặt z-20, w-full */}
+                  <h3 className="text-[28px] md:text-[32px] font-semibold leading-[1.125] mb-4 ">
+                    {card.title}
+                  </h3>
+                  <p className="text-[17px] md:text-[19px] leading-[1.47059] opacity-90 mb-6">
+                    {card.description}
+                  </p>
+                  <Link
+                    href={card.imageUrl} // Xem lại href này
+                    className="text-white text-[17px] hover:underline inline-flex items-center mt-auto font-medium self-start" // Thêm self-start nếu muốn nút căn trái
                   >
-                    <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" />
-                  </svg>
-                </Link>
+                    Tìm hiểu thêm
+                    <svg
+                      className="ml-2 w-4 h-4"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" />
+                    </svg>
+                  </Link>
+                </div>
               </div>
             ))}
           </div>
@@ -178,24 +193,27 @@ const MacDetail = async ({ params }: { params: { id: string } }) => {
           <h2 className="text-[40px] md:text-[56px] font-semibold mb-8 md:mb-16 leading-[1.07143] tracking-tight text-center">
             {menuMacInfo[2].title}
           </h2>
-
-          <div className="flex gap-8 md:gap-12 ">
-            {menuMacInfo[2].WhyMacCards?.map((card, index) => (
-              <div
-                key={index}
-                className="text-center min-w-[344px] py-4 px-8 min-h-[312px] rounded-2xl bg-[#F5F5F7]"
-              >
-                <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 mb-4 text-gray-600">
-                  {iconMap[card.icon] || <Settings className="w-12 h-12" />}
-                </div>
-                <h3 className="text-[21px] md:text-[24px] font-semibold leading-[1.16667] mb-3">
-                  {card.title}
-                </h3>
-                <p className="text-[14px] md:text-[17px] leading-[1.47059] text-gray-600 max-w-[340px] mx-auto">
-                  {card.description}
-                </p>
+          <div className=" pb-6 overflow-x-auto scrollbar-hide">
+            <SmoothScrollContainer>
+              <div className="flex gap-8 md:gap-12 ">
+                {menuMacInfo[2].WhyMacCards?.map((card, index) => (
+                  <div
+                    key={index}
+                    className="text-center min-w-[344px] py-4 px-8 min-h-[312px] rounded-2xl bg-[#F5F5F7]"
+                  >
+                    <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 mb-4 text-gray-600">
+                      {iconMap[card.icon] || <Settings className="w-12 h-12" />}
+                    </div>
+                    <h3 className="text-[21px] md:text-[24px] font-semibold leading-[1.16667] mb-3">
+                      {card.title}
+                    </h3>
+                    <p className="text-[14px] md:text-[17px] leading-[1.47059] text-gray-600 max-w-[340px] mx-auto">
+                      {card.description}
+                    </p>
+                  </div>
+                ))}
               </div>
-            ))}
+            </SmoothScrollContainer>
           </div>
         </div>
       </section>
@@ -214,15 +232,23 @@ const MacDetail = async ({ params }: { params: { id: string } }) => {
               <Link
                 href={card.imageUrl}
                 key={index}
-                className="group relative rounded-[28px] overflow-hidden bg-[#F5F5F7] min-h-[400px] md:min-h-[500px] flex flex-col justify-end p-8 md:p-12 hover:shadow-2xl transition-shadow duration-300"
+                className="group relative rounded-[28px] overflow-hidden bg-[#F5F5F7] text-[#f5f5f7] min-h-[400px] md:min-h-[500px] flex flex-col justify-end p-8 md:p-12 hover:shadow-2xl transition-shadow duration-300"
               >
-                <h3 className="text-[28px] md:text-[32px] font-semibold leading-[1.125] mb-3">
+                <img
+                  src={card.imageUrl}
+                  alt={card.title}
+                  // Ảnh nằm tuyệt đối, lấp đầy container, z-index thấp nhất TRONG card này
+                  className="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-105 transition-transform duration-500" // Đổi -z-10 thành z-0
+                />
+                {/* Lớp phủ Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent z-10"></div>{" "}
+                <h3 className="text-[28px] z-20 md:text-[32px] font-semibold leading-[1.125] mb-3">
                   {card.title}
                 </h3>
-                <p className="text-[17px] md:text-[19px] leading-[1.47059] text-gray-700 mb-6">
+                <p className="text-[17px] md:text-[19px] leading-[1.47059] z-20 mb-6">
                   {card.description}
                 </p>
-                <div className="text-[#0066CC] text-[17px] inline-flex items-center">
+                <div className="text-[#0066CC] z-20 text-[17px] inline-flex items-center">
                   Tìm hiểu thêm
                   <svg
                     className="ml-2 w-4 h-4"

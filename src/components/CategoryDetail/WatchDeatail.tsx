@@ -1,6 +1,6 @@
 import React, { JSX } from "react";
-import Image from "next/image";
-import { menuWatchInfo } from "@/Data/WatchInfo";
+// import Image from "next/image"; // Không cần dùng Image của Next.js nếu dùng <img> thường
+import { menuWatchInfo } from "@/Data/WatchInfo"; // Đảm bảo đường dẫn đúng
 import { WatchTopNav } from "../ComponentDetailCategories/Nav";
 import { SmoothScrollContainer } from "../ComponentDetailCategories/smooth";
 import {
@@ -13,23 +13,22 @@ import {
   Watch,
   Headphones,
   Gift,
-  Zap,
+  Zap, // Zap có vẻ không dùng trong iconMap?
 } from "lucide-react";
 import prisma from "@/lib/db";
 import Link from "next/link";
 import { Button } from "../ui/button";
-// Icon mapping
-const iconMap: Record<string, JSX.Element> = {
-  heart_health: <Heart className="w-12 h-12" />,
-  fitness_activity: <Activity className="w-12 h-12" />,
-  safety_sos: <Shield className="w-12 h-12" />,
-  water_resistant: <Droplets className="w-12 h-12" />,
-  battery_optimized: <Battery className="w-12 h-12" />,
-  cellular_lte: <Smartphone className="w-12 h-12" />,
-  customize_faces: <Watch className="w-12 h-12" />,
-};
 
-// Top Navigation Component
+// Icon mapping (giữ nguyên)
+const iconMap: Record<string, JSX.Element> = {
+  heart_health: <Heart className="w-12 h-12 text-gray-600" />, // Thêm màu mặc định
+  fitness_activity: <Activity className="w-12 h-12 text-gray-600" />,
+  safety_sos: <Shield className="w-12 h-12 text-gray-600" />,
+  water_resistant: <Droplets className="w-12 h-12 text-gray-600" />,
+  battery_optimized: <Battery className="w-12 h-12 text-gray-600" />,
+  cellular_lte: <Smartphone className="w-12 h-12 text-gray-600" />,
+  customize_faces: <Watch className="w-12 h-12 text-gray-600" />,
+};
 
 const WatchDetail = async ({ params }: { params: { id: string } }) => {
   const idDb = await prisma.category.findUnique({
@@ -45,7 +44,6 @@ const WatchDetail = async ({ params }: { params: { id: string } }) => {
       <div className="h-[52px]">
         <WatchTopNav />
       </div>
-
       {/* Promotional Banner */}
       <div className="w-full bg-[#F5F5F7] py-3 px-4 mt-16">
         <div className="max-w-[980px] mx-auto text-center">
@@ -57,7 +55,6 @@ const WatchDetail = async ({ params }: { params: { id: string } }) => {
           </p>
         </div>
       </div>
-
       {/* Hero Section */}
       <div className="w-full mx-auto px-4 md:px-15">
         <div className="flex items-center justify-between py-16 md:py-20">
@@ -72,12 +69,12 @@ const WatchDetail = async ({ params }: { params: { id: string } }) => {
           </div>
         </div>
 
-        <section className="w-full py-12 md:py-20">
+        {/* Product Display Section */}
+        <section className="w-full pb-12 md:pb-20">
+          {" "}
+          {/* Bỏ py */}
           <div className="max-w-[1440px] mx-auto px-4 text-center">
-            <h2 className="text-[40px] md:text-[56px] font-semibold mb-8 md:mb-12 leading-[1.07143] tracking-tight">
-              Apple Watch
-            </h2>
-
+            {/* Bỏ tiêu đề "Apple Watch" ở đây vì đã có ở Hero */}
             <div className="flex items-center justify-center gap-4 md:gap-6 ">
               {idDb?.products?.map((product) => (
                 <Link
@@ -85,36 +82,30 @@ const WatchDetail = async ({ params }: { params: { id: string } }) => {
                   key={product.id}
                   className="group block"
                 >
+                  {/* Card Sản phẩm lấy từ DB (Giữ nguyên cấu trúc cũ vì khác card thông tin)*/}
                   <div className="bg-white rounded-[28px] min-h-[650px] min-w-[405px] max-w-[370px] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
-                    {/* Image with Gradient */}
                     <div
                       className={`relative h-[420px] bg-gradient-to-br bg-[#A5B4FC] flex items-center justify-center`}
                     >
                       <div className="relative w-full h-full">
+                        {/* Sử dụng thẻ <img> thường */}
                         <img
                           src={product.imageUrl || "/placeholder.jpg"}
                           alt={product.name}
-                          className="absolute inset-0 w-full h-full object-center object-cover transform group-hover:scale-105 transition-transform duration-500" // Sử dụng absolute positioning
-                          loading="lazy"
+                          className="absolute inset-0 w-full h-full object-center object-cover transform group-hover:scale-105 transition-transform duration-500"
+                          loading="lazy" // Thêm lazy loading
                         />
                       </div>
                     </div>
-
-                    {/* Product Info */}
                     <div className="p-6 text-center bg-white">
-                      {/* Product Name */}
-                      <h3 className="text-2xl font-semibold  mb-2">
+                      <h3 className="text-2xl font-semibold mb-2">
                         {product.name}
                       </h3>
-
-                      {/* Description */}
                       {product.description && (
                         <p className="text-sm text-gray-600 mb-4 leading-relaxed line-clamp-2">
                           {product.description}
                         </p>
                       )}
-
-                      {/* Pricing */}
                       <div className="mb-6">
                         <p className="text-sm ">
                           Từ{" "}
@@ -123,8 +114,6 @@ const WatchDetail = async ({ params }: { params: { id: string } }) => {
                           </span>
                         </p>
                       </div>
-
-                      {/* Action Buttons */}
                       <div className="flex gap-3">
                         <Button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-full text-sm py-5">
                           Mua ngay
@@ -141,164 +130,177 @@ const WatchDetail = async ({ params }: { params: { id: string } }) => {
                 </Link>
               ))}
             </div>
-
-            {/* Show message if no products */}
             {(!idDb?.products || idDb.products.length === 0) && (
               <div className="text-center py-12">
                 <p className="text-gray-500 text-lg">
-                  Chưa có sản phẩm iPhone nào trong hệ thống
+                  Chưa có sản phẩm Watch nào trong hệ thống
                 </p>
               </div>
             )}
           </div>
         </section>
       </div>
-
+      {/* --- CÁC SECTION DÙNG LAYOUT ẢNH NỀN --- */}
       {/* Section 1: Khám Phá Apple Watch */}
       <section className="w-full py-12 md:py-20">
         <div className="max-w-[1440px] mx-auto px-4">
           <h2 className="text-[40px] md:text-[56px] font-semibold mb-8 md:mb-12 leading-[1.07143] tracking-tight">
             {menuWatchInfo[0].title}
           </h2>
-
           <div className=" overflow-x-auto scrollbar-hide pb-6 -mx-4 px-4">
             <SmoothScrollContainer>
               {menuWatchInfo[0].cards?.map((card, index) => (
-                <a
-                  href="#"
+                <div // Đổi <a> thành <div> vì có link bên trong
                   key={index}
-                  className="group relative flex-shrink-0 w-[340px] md:w-[405px] h-[580px] md:h-[700px] rounded-[28px] overflow-hidden bg-[#F5F5F7] snap-center"
+                  className="relative group flex-shrink-0 w-[340px] md:w-[405px] h-[580px] md:h-[700px] rounded-[28px] overflow-hidden snap-center flex flex-col" // Thêm flex flex-col
                 >
-                  <div className="relative w-full h-full">
-                    <img
-                      src={card.imageUrl}
-                      alt={card.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                  </div>
-
-                  <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
+                  <img
+                    src={card.imageUrl}
+                    alt={card.title}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 z-0"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent z-10"></div>
+                  <div className="relative z-20 p-6 md:p-8 text-white flex flex-col justify-end flex-grow">
                     <h3 className="text-[24px] md:text-[28px] font-semibold leading-[1.14286] mb-2">
                       {card.title}
                     </h3>
-                    <p className="text-[17px] md:text-[19px] leading-[1.42105] opacity-90 whitespace-pre-line">
+                    <p className="text-[17px] md:text-[19px] leading-[1.42105] opacity-90 whitespace-pre-line mb-4">
                       {card.description}
                     </p>
+                    {/* Link Tìm hiểu thêm nếu cần */}
+                    {/* <Link href="#" className="text-white text-[17px] hover:underline inline-flex items-center mt-auto font-medium self-start">...</Link> */}
                   </div>
-                </a>
+                </div>
               ))}
             </SmoothScrollContainer>
           </div>
         </div>
       </section>
-
       <div className="w-full border-t border-gray-200 my-12"></div>
-
       {/* Section 2: Sức Khỏe Và Thể Thao */}
       <section className="w-full py-12 md:py-20">
         <div className="max-w-[1440px] mx-auto px-4">
           <h2 className="text-[40px] md:text-[56px] font-semibold mb-8 md:mb-12 leading-[1.07143] tracking-tight">
             {menuWatchInfo[1].title}
           </h2>
-
           <div className="grid md:grid-cols-2 gap-4 md:gap-6">
             {menuWatchInfo[1].cards?.map((card, index) => (
               <div
                 key={index}
-                className="relative rounded-[28px] overflow-hidden bg-[#F5F5F7] p-8 md:p-12 min-h-[400px] md:min-h-[500px] flex flex-col justify-end hover:shadow-xl transition-shadow duration-300"
+                className="relative rounded-[28px] overflow-hidden min-h-[400px] md:min-h-[500px] group hover:shadow-xl transition-shadow duration-300 flex flex-col"
               >
-                <h3 className="text-[28px] md:text-[32px] font-semibold leading-[1.125] mb-4">
-                  {card.title}
-                </h3>
-                <p className="text-[17px] md:text-[19px] leading-[1.47059] text-gray-700 mb-6">
-                  {card.description}
-                </p>
-                <a
-                  href={card.imageUrl}
-                  className="text-[#0066CC] text-[17px] hover:underline inline-flex items-center"
-                >
-                  Tìm hiểu thêm
-                  <svg
-                    className="ml-2 w-4 h-4"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
+                <img
+                  src={card.imageUrl} // Dùng URL ảnh đã thay thế
+                  alt={card.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 z-0"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent z-10"></div>
+                <div className="relative z-20 p-8 md:p-12 flex flex-col justify-end flex-grow text-white">
+                  <h3 className="text-[28px] md:text-[32px] font-semibold leading-[1.125] mb-4">
+                    {card.title}
+                  </h3>
+                  <p className="text-[17px] md:text-[19px] leading-[1.47059] opacity-90 mb-6">
+                    {card.description}
+                  </p>
+                  <Link // Dùng Link thay vì <a>
+                    href={card.imageUrl} // Xem lại href
+                    className="text-white text-[17px] hover:underline inline-flex items-center mt-auto font-medium self-start"
                   >
-                    <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" />
-                  </svg>
-                </a>
+                    Tìm hiểu thêm
+                    <svg
+                      className="ml-2 w-4 h-4"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" />
+                    </svg>
+                  </Link>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
-
       <div className="w-full border-t border-gray-200 my-12"></div>
-
       {/* Section 3: Tập Luyện Và Hoạt Động */}
       <section className="w-full py-12 md:py-20">
         <div className="max-w-[1440px] mx-auto px-4">
           <h2 className="text-[40px] md:text-[56px] font-semibold mb-8 md:mb-12 leading-[1.07143] tracking-tight">
             {menuWatchInfo[2].title}
           </h2>
-
           <div className="grid md:grid-cols-3 gap-4 md:gap-6">
             {menuWatchInfo[2].cards?.map((card, index) => (
               <div
                 key={index}
-                className="relative rounded-[28px] overflow-hidden bg-[#F5F5F7] p-8 md:p-10 min-h-[380px] flex flex-col justify-end hover:shadow-xl transition-shadow duration-300"
+                className="relative rounded-[28px] overflow-hidden min-h-[380px] group hover:shadow-xl transition-shadow duration-300 flex flex-col"
               >
-                <h3 className="text-[24px] md:text-[28px] font-semibold leading-[1.14286] mb-3">
-                  {card.title}
-                </h3>
-                <p className="text-[14px] md:text-[17px] leading-[1.47059] text-gray-700 mb-5">
-                  {card.description}
-                </p>
-                <a
-                  href={card.imageUrl}
-                  className="text-[#0066CC] text-[17px] hover:underline inline-flex items-center"
-                >
-                  Tìm hiểu thêm
-                  <svg
-                    className="ml-2 w-4 h-4"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
+                <img
+                  src={card.imageUrl} // Dùng URL ảnh đã thay thế
+                  alt={card.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 z-0"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent z-10"></div>
+                <div className="relative z-20 p-8 md:p-10 flex flex-col justify-end flex-grow text-white">
+                  <h3 className="text-[24px] md:text-[28px] font-semibold leading-[1.14286] mb-3">
+                    {card.title}
+                  </h3>
+                  <p className="text-[14px] md:text-[17px] leading-[1.47059] opacity-90 mb-5">
+                    {card.description}
+                  </p>
+                  <Link // Dùng Link thay vì <a>
+                    href={card.imageUrl} // Xem lại href
+                    className="text-white text-[17px] hover:underline inline-flex items-center mt-auto font-medium self-start"
                   >
-                    <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" />
-                  </svg>
-                </a>
+                    Tìm hiểu thêm
+                    <svg
+                      className="ml-2 w-4 h-4"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" />
+                    </svg>
+                  </Link>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
-
+      {/* Bỏ Section 4: So Sánh (Không có ảnh) */}
       <div className="w-full border-t border-gray-200 my-12"></div>
-
-      <div className="w-full border-t border-gray-200 my-12"></div>
-
-      {/* Section 5: Tại Sao Chọn Apple Watch */}
+      {/* Section 5: Tại Sao Chọn Apple Watch (Chỉ có Icon) */}
       <section className="w-full py-12 md:py-20 bg-white">
         <div className="max-w-[1440px] mx-auto px-4">
           <h2 className="text-[40px] md:text-[56px] font-semibold mb-8 md:mb-16 leading-[1.07143] tracking-tight text-center">
-            {menuWatchInfo[4].title}
+            {menuWatchInfo[4].title} {/* Sử dụng title từ index 4 */}
           </h2>
-
           <div className=" pb-6 -mx-4 px-4 overflow-x-auto scrollbar-hide">
             <SmoothScrollContainer>
+              {/* Lặp qua WhyWatchCards từ index 4 */}
               {menuWatchInfo[4].WhyWatchCards?.map((card, index) => (
                 <div
                   key={index}
-                  className="text-center min-w-[344px] py-4 px-8 min-h-[312px] rounded-2xl bg-[#F5F5F7] flex flex-col items-center justify-center snap-center"
+                  className="text-center min-w-[344px] py-8 px-8 min-h-[312px] rounded-2xl bg-[#F5F5F7] flex flex-col items-center justify-center snap-center" // Tăng padding py-8
                 >
-                  <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 mb-4 text-gray-600">
-                    {iconMap[card.icon] || <Watch className="w-12 h-12" />}
+                  <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 mb-6 text-gray-600">
+                    {" "}
+                    {/* Tăng mb-6 */}
+                    {iconMap[card.icon] || (
+                      <Watch className="w-12 h-12 text-gray-600" />
+                    )}
                   </div>
-                  <h3 className="text-[21px] md:text-[24px] font-semibold leading-[1.16667] mb-3">
-                    {card.title}
+                  <h3 className="text-[21px] md:text-[24px] font-semibold leading-[1.16667] mb-3 text-gray-900">
+                    {" "}
+                    {/* Màu chữ */}
+                    {card?.title}
                   </h3>
-                  <p className="text-[14px] md:text-[17px] leading-[1.47059] text-gray-600 max-w-[340px] mx-auto">
-                    {card.description}
+                  <p className="text-[14px] md:text-[17px] leading-[1.47059] text-gray-600 max-w-[300px] mx-auto">
+                    {" "}
+                    {/* Giảm max-w */}
+                    {card?.description}
                   </p>
                 </div>
               ))}
@@ -306,125 +308,147 @@ const WatchDetail = async ({ params }: { params: { id: string } }) => {
           </div>
         </div>
       </section>
-
+      <div className="w-full border-t border-gray-200 my-12"></div>{" "}
+      {/* Separator sau section 5 */}
       <div className="w-full border-t border-gray-200 my-12"></div>
-
       {/* Section 6: Dây Đeo Apple Watch */}
       <section className="w-full py-12 md:py-20">
         <div className="max-w-[1440px] mx-auto px-4">
           <h2 className="text-[40px] md:text-[56px] font-semibold mb-8 md:mb-12 leading-[1.07143] tracking-tight">
             {menuWatchInfo[5].title}
           </h2>
-
           <div className="grid md:grid-cols-3 gap-4 md:gap-6">
             {menuWatchInfo[5].cards?.map((card, index) => (
-              <a
-                href={card.imageUrl}
+              <div // Đổi <a> thành <div>
                 key={index}
-                className="group relative rounded-[28px] overflow-hidden bg-[#F5F5F7] min-h-[420px] flex flex-col justify-end p-8 md:p-10 hover:shadow-2xl transition-shadow duration-300"
+                className="relative rounded-[28px] overflow-hidden min-h-[420px] group hover:shadow-2xl transition-shadow duration-300 flex flex-col"
               >
-                <h3 className="text-[24px] md:text-[28px] font-semibold leading-[1.14286] mb-3">
-                  {card.title}
-                </h3>
-                <p className="text-[14px] md:text-[17px] leading-[1.47059] text-gray-700 mb-6">
-                  {card.description}
-                </p>
-                <div className="text-[#0066CC] text-[17px] inline-flex items-center">
-                  Tìm hiểu thêm
-                  <svg
-                    className="ml-2 w-4 h-4"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
+                <img
+                  src={card.imageUrl} // Dùng URL ảnh đã thay thế
+                  alt={card.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 z-0"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent z-10"></div>
+                <div className="relative z-20 p-8 md:p-10 flex flex-col justify-end flex-grow text-white">
+                  <h3 className="text-[24px] md:text-[28px] font-semibold leading-[1.14286] mb-3">
+                    {card.title}
+                  </h3>
+                  <p className="text-[14px] md:text-[17px] leading-[1.47059] opacity-90 mb-6">
+                    {card.description}
+                  </p>
+                  <Link // Dùng Link
+                    href={card.imageUrl} // Xem lại href
+                    className="text-white text-[17px] hover:underline inline-flex items-center mt-auto font-medium self-start"
                   >
-                    <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" />
-                  </svg>
+                    Tìm hiểu thêm
+                    <svg
+                      className="ml-2 w-4 h-4"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" />
+                    </svg>
+                  </Link>
                 </div>
-              </a>
+              </div>
             ))}
           </div>
         </div>
       </section>
-
       <div className="w-full border-t border-gray-200 my-12"></div>
-
       {/* Section 7: Apple Watch Trong Cuộc Sống */}
       <section className="w-full py-12 md:py-20 bg-[#FBFBFD]">
         <div className="max-w-[1440px] mx-auto px-4">
           <h2 className="text-[40px] md:text-[56px] font-semibold mb-8 md:mb-12 leading-[1.07143] tracking-tight">
             {menuWatchInfo[6].title}
           </h2>
-
           <div className="grid md:grid-cols-2 gap-4 md:gap-6">
             {menuWatchInfo[6].cards?.map((card, index) => (
               <div
                 key={index}
-                className="relative rounded-[28px] overflow-hidden bg-white p-8 md:p-12 min-h-[380px] flex flex-col justify-end hover:shadow-xl transition-shadow duration-300"
+                className="relative rounded-[28px] overflow-hidden min-h-[380px] group hover:shadow-xl transition-shadow duration-300 flex flex-col"
+                style={{ backgroundColor: "white" }} // Thêm nền trắng nếu cần
               >
-                <h3 className="text-[28px] md:text-[32px] font-semibold leading-[1.125] mb-4">
-                  {card.title}
-                </h3>
-                <p className="text-[17px] md:text-[19px] leading-[1.47059] text-gray-700 mb-6">
-                  {card.description}
-                </p>
-                <a
-                  href={card.imageUrl}
-                  className="text-[#0066CC] text-[17px] hover:underline inline-flex items-center"
-                >
-                  Tìm hiểu thêm
-                  <svg
-                    className="ml-2 w-4 h-4"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
+                <img
+                  src={card.imageUrl} // Dùng URL ảnh đã thay thế
+                  alt={card.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 z-0"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent z-10"></div>
+                <div className="relative z-20 p-8 md:p-12 flex flex-col justify-end flex-grow text-white">
+                  <h3 className="text-[28px] md:text-[32px] font-semibold leading-[1.125] mb-4">
+                    {card.title}
+                  </h3>
+                  <p className="text-[17px] md:text-[19px] leading-[1.47059] opacity-90 mb-6">
+                    {card.description}
+                  </p>
+                  <Link // Dùng Link thay vì <a>
+                    href={card.imageUrl} // Xem lại href
+                    className="text-white text-[17px] hover:underline inline-flex items-center mt-auto font-medium self-start"
                   >
-                    <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" />
-                  </svg>
-                </a>
+                    Tìm hiểu thêm
+                    <svg
+                      className="ml-2 w-4 h-4"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" />
+                    </svg>
+                  </Link>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
-
       <div className="w-full border-t border-gray-200 my-12"></div>
-
       {/* Section 8: Apple Fitness+ */}
       <section className="w-full py-12 md:py-20">
         <div className="max-w-[1440px] mx-auto px-4">
           <h2 className="text-[40px] md:text-[56px] font-semibold mb-8 md:mb-12 leading-[1.07143] tracking-tight">
             {menuWatchInfo[7].title}
           </h2>
-
           <div className="grid md:grid-cols-2 gap-4 md:gap-6">
             {menuWatchInfo[7].cards?.map((card, index) => (
               <div
                 key={index}
-                className="relative rounded-[28px] overflow-hidden bg-[#F5F5F7] p-8 md:p-12 min-h-[400px] md:min-h-[500px] flex flex-col justify-end"
+                className="relative rounded-[28px] overflow-hidden min-h-[400px] md:min-h-[500px] group hover:shadow-xl transition-shadow duration-300 flex flex-col"
               >
-                <h3 className="text-[28px] md:text-[32px] font-semibold leading-[1.125] mb-4">
-                  {card.title}
-                </h3>
-                <p className="text-[17px] md:text-[19px] leading-[1.47059] text-gray-700 mb-6">
-                  {card.description}
-                </p>
-                <a
-                  href={card.imageUrl}
-                  className="text-[#0066CC] text-[17px] hover:underline inline-flex items-center"
-                >
-                  Tìm hiểu thêm
-                  <svg
-                    className="ml-2 w-4 h-4"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
+                <img
+                  src={card.imageUrl} // Dùng URL ảnh đã thay thế
+                  alt={card.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 z-0"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent z-10"></div>
+                <div className="relative z-20 p-8 md:p-12 flex flex-col justify-end flex-grow text-white">
+                  <h3 className="text-[28px] md:text-[32px] font-semibold leading-[1.125] mb-4">
+                    {card.title}
+                  </h3>
+                  <p className="text-[17px] md:text-[19px] leading-[1.47059] opacity-90 mb-6">
+                    {card.description}
+                  </p>
+                  <Link // Dùng Link thay vì <a>
+                    href={card.imageUrl} // Xem lại href
+                    className="text-white text-[17px] hover:underline inline-flex items-center mt-auto font-medium self-start"
                   >
-                    <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" />
-                  </svg>
-                </a>
+                    Tìm hiểu thêm
+                    <svg
+                      className="ml-2 w-4 h-4"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" />
+                    </svg>
+                  </Link>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
-
       {/* Help Me Choose Section */}
       <section className="w-full py-12 md:py-20 bg-[#F5F5F7]">
         <div className="max-w-[980px] mx-auto px-4 text-center">
@@ -440,24 +464,23 @@ const WatchDetail = async ({ params }: { params: { id: string } }) => {
           </button>
         </div>
       </section>
-
       {/* Bottom Spacer */}
       <div className="h-12 md:h-20"></div>
-
-      {/* Footer Navigation Section */}
+      {/* Footer Navigation Section (giữ nguyên) */}
       <footer className="w-full bg-[#F5F5F7] py-12 md:py-16">
         <div className="max-w-[980px] pl-10 px-4">
           <h2 className="text-[40px] md:text-[56px] font-semibold mb-8 md:mb-12 leading-[1.05] tracking-tight">
             Apple Watch
           </h2>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 font-semibold text-[24px]">
-            {/* Column 1: Khám Phá Apple Watch */}
+            {/* ... Nội dung footer ... */}
             <div className="space-y-3">
               <h3 className="text-[30px] font-semibold text-gray-500 mb-4">
                 Khám Phá Apple Watch
               </h3>
-              <ul className="space-y-3 text-[14px]">
+              <ul className="space-y-3 text-[14px] font-normal">
+                {" "}
+                {/* font-normal */}
                 <li>
                   <a href="/watch" className="hover:underline">
                     Khám Phá Tất Cả Apple Watch
@@ -495,7 +518,9 @@ const WatchDetail = async ({ params }: { params: { id: string } }) => {
                   </a>
                 </li>
               </ul>
-              <div className="pt-4 space-y-3 text-[14px]">
+              <div className="pt-4 space-y-3 text-[14px] font-normal">
+                {" "}
+                {/* font-normal */}
                 <p>
                   <a href="/watch/compare" className="hover:underline">
                     So Sánh Apple Watch
@@ -508,13 +533,13 @@ const WatchDetail = async ({ params }: { params: { id: string } }) => {
                 </p>
               </div>
             </div>
-
-            {/* Column 2: Mua Apple Watch */}
             <div className="space-y-3">
               <h3 className="text-[30px] font-semibold text-gray-500 mb-4">
                 Mua Apple Watch
               </h3>
-              <ul className="space-y-3 text-[14px]">
+              <ul className="space-y-3 text-[14px] font-normal">
+                {" "}
+                {/* font-normal */}
                 <li>
                   <a href="/shop/watch" className="hover:underline">
                     Mua Apple Watch
@@ -547,13 +572,13 @@ const WatchDetail = async ({ params }: { params: { id: string } }) => {
                 </li>
               </ul>
             </div>
-
-            {/* Column 3: Tìm Hiểu Thêm */}
             <div className="space-y-3">
               <h3 className="text-[30px] font-semibold text-gray-500 mb-4">
                 Tìm Hiểu Thêm Về Apple Watch
               </h3>
-              <ul className="space-y-3 text-[14px]">
+              <ul className="space-y-3 text-[14px] font-normal">
+                {" "}
+                {/* font-normal */}
                 <li>
                   <a href="/watch/support" className="hover:underline">
                     Hỗ Trợ Apple Watch
@@ -594,8 +619,6 @@ const WatchDetail = async ({ params }: { params: { id: string } }) => {
           </div>
         </div>
       </footer>
-
-      {/* Custom CSS */}
     </div>
   );
 };
