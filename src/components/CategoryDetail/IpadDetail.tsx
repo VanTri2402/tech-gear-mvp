@@ -119,15 +119,14 @@ const IPadDetail = async ({ params }: { params: { id: string } }) => {
                     )} flex items-center justify-center`}
                   >
                     <div className="relative w-full h-full">
-                      <Image
+                      <img
                         src={
                           product.imageUrl ||
                           "https://www.apple.com/v/ipad/home/ck/images/overview/select/product-tile/pt_ipad_pro__6bgrkek0jnm2_large.png"
                         }
                         alt={product.name}
-                        fill
-                        className="object-center object-cover transform group-hover:scale-105 transition-transform duration-500"
-                        quality={90}
+                        className="absolute inset-0 w-full h-full object-center object-cover transform group-hover:scale-105 transition-transform duration-500" // Sử dụng absolute positioning
+                        loading="lazy"
                       />
                     </div>
                   </div>
@@ -204,11 +203,14 @@ const IPadDetail = async ({ params }: { params: { id: string } }) => {
                     className="group relative flex-shrink-0 w-[340px] md:w-[405px] h-[580px] md:h-[700px] rounded-[28px] overflow-hidden bg-[#F5F5F7]"
                   >
                     <div className="relative w-full h-full">
-                      <Image
-                        src={`https://www.apple.com/v/ipad/home/ck/images/overview/select/product-tile/pt_ipad_pro__6bgrkek0jnm2_large.png`}
+                      <img
+                        src={
+                          card.imageUrl ||
+                          `https://www.apple.com/v/ipad/home/ck/images/overview/select/product-tile/pt_ipad_pro__6bgrkek0jnm2_large.png`
+                        } // Cần thay bằng URL ảnh phù hợp
                         alt={card.title}
-                        fill
-                        className="object-contain transition-transform duration-500 group-hover:scale-105"
+                        className="absolute inset-0 w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" // object-contain nếu cần
+                        loading="lazy"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                     </div>

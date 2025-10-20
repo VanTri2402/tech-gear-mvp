@@ -106,11 +106,11 @@ const MacDetail = async ({ params }: { params: { id: string } }) => {
                   className="group relative flex-shrink-0 w-[340px] md:w-[405px] h-[580px] md:h-[700px] rounded-[28px] overflow-hidden bg-[#F5F5F7]"
                 >
                   <div className="relative w-full h-full">
-                    <Image
-                      src={card.imageUrl || "/placeholder.jpg"}
+                    <img
+                      src={card.imageUrl || "/placeholder-mac.jpg"} // Cần thay bằng URL ảnh phù hợp
                       alt={card.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                   </div>

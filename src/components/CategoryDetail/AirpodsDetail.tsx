@@ -63,25 +63,11 @@ const AirPodsDetail = () => (
       </div>
 
       <div className="relative w-full rounded-[28px] overflow-hidden mb-12">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          className="w-full h-auto"
-          poster="https://www.apple.com/v/airpods/a/images/overview/hero/airpods_hero_poster__l2j3k8m3k8m_large.jpg"
-        >
-          <source
-            src="https://www.apple.com/v/airpods/a/videos/hero/airpods_hero_large.mp4"
-            type="video/mp4"
-          />
-          <img
-            src="https://www.apple.com/v/airpods/a/images/overview/hero/airpods_hero_poster__l2j3k8m3k8m_large.jpg"
-            alt="AirPods Hero"
-            className="w-full h-auto"
-          />
-        </video>
+        <img
+          src={menuAirPodsInfo[0].imageUrl}
+          alt="AirPods Hero"
+          className="w-full h-[800px] object-cover object-center"
+        />
       </div>
     </div>
 
@@ -107,6 +93,7 @@ const AirPodsDetail = () => (
                     src={feature.imageUrl}
                     alt={feature.title}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -260,6 +247,7 @@ const AirPodsDetail = () => (
                     src={useCase.imageUrl}
                     alt={useCase.title}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                 </div>
               </div>

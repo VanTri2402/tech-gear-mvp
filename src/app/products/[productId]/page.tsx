@@ -2,8 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { WishlistButton } from "@/components/WishListButton";
 import prisma from "@/lib/db";
-import Image from "next/image";
 import { ShoppingCart, Heart, Truck, Shield, RotateCcw } from "lucide-react";
+import Link from "next/link";
 
 const ProductDetail = async ({ params }: { params: { productId: string } }) => {
   const { productId } = params;
@@ -19,13 +19,13 @@ const ProductDetail = async ({ params }: { params: { productId: string } }) => {
       {/* Breadcrumb */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
         <nav className="text-sm text-gray-500">
-          <a href="/" className="hover:text-blue-600">
+          <Link href="/" className="hover:text-blue-600">
             Home
-          </a>
+          </Link>
           <span className="mx-2">/</span>
-          <a href="/products" className="hover:text-blue-600">
+          <Link href="/products" className="hover:text-blue-600">
             Products
-          </a>
+          </Link>
           <span className="mx-2">/</span>
           <span className="text-gray-900">{product.name}</span>
         </nav>
@@ -38,13 +38,11 @@ const ProductDetail = async ({ params }: { params: { productId: string } }) => {
           <div className="sticky top-8">
             {/* Main Image */}
             <div className="relative aspect-square bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl overflow-hidden">
-              <Image
+              <img
                 src={product.imageUrl || "/placeholder.jpg"}
                 alt={product.name}
-                fill
-                quality={95}
-                className="object-cover transition-transform duration-700 hover:scale-105"
-                priority
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                loading="lazy"
               />
             </div>
           </div>

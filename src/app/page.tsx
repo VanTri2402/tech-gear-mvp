@@ -60,14 +60,12 @@ export default async function HomePage() {
                     product.category
                   )} flex items-center justify-center`}
                 >
-                  <Image
+                  <img
                     src={product.imageUrl || "/placeholder.jpg"}
                     alt={product.name}
-                    fill
-                    // FIX BUG HOVER: Đảm bảo ảnh có z-index thấp hơn text info (z-10 < z-20)
-                    className="object-cover object-center transform scale-[1.25] group-hover:scale-[1.35] transition-transform duration-700 z-10"
-                    quality={80}
-                    priority={false}
+                    className="absolute inset-0 w-full h-[350px] object-cover object-center transform scale-[1.25] group-hover:scale-[1.35] transition-transform duration-700 z-10" // Sử dụng absolute positioning
+                    loading="lazy"
+                    // quality và priority bị loại bỏ
                   />
                 </div>
 

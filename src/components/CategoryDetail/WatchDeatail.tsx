@@ -91,12 +91,11 @@ const WatchDetail = async ({ params }: { params: { id: string } }) => {
                       className={`relative h-[420px] bg-gradient-to-br bg-[#A5B4FC] flex items-center justify-center`}
                     >
                       <div className="relative w-full h-full">
-                        <Image
+                        <img
                           src={product.imageUrl || "/placeholder.jpg"}
                           alt={product.name}
-                          fill
-                          className="object-center object-cover transform group-hover:scale-105 transition-transform duration-500"
-                          quality={90}
+                          className="absolute inset-0 w-full h-full object-center object-cover transform group-hover:scale-105 transition-transform duration-500" // Sử dụng absolute positioning
+                          loading="lazy"
                         />
                       </div>
                     </div>

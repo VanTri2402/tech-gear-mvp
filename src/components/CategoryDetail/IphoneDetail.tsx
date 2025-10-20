@@ -128,12 +128,11 @@ const IPhoneDetail = async ({ params }: { params: { id: string } }) => {
                     )} flex items-center justify-center`}
                   >
                     <div className="relative w-full h-full">
-                      <Image
+                      <img
                         src={product.imageUrl || "/placeholder.jpg"}
                         alt={product.name}
-                        fill
-                        className="object-center object-cover transform group-hover:scale-105 transition-transform duration-500"
-                        quality={90}
+                        className="absolute inset-0 w-full h-full object-center object-cover transform group-hover:scale-105 transition-transform duration-500" // Sử dụng absolute positioning và w-full h-full
+                        loading="lazy"
                       />
                     </div>
                   </div>
@@ -213,11 +212,11 @@ const IPhoneDetail = async ({ params }: { params: { id: string } }) => {
                   className="group relative flex-shrink-0 w-[340px] md:w-[405px] h-[580px] md:h-[700px] rounded-[28px] overflow-hidden bg-[#F5F5F7]"
                 >
                   <div className="relative w-full h-full">
-                    <Image
-                      src={card.imageUrl || "/placeholder.jpg"}
+                    <img
+                      src={card.imageUrl || "/placeholder-iphone.jpg"}
                       alt={card.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                   </div>
