@@ -10,6 +10,9 @@ import prisma from "@/lib/db";
 import { UserProfile } from "./UserProfile";
 import { NavLinksClient } from "./NavLinksClient"; // Đảm bảo tên import đúng
 import getCategories from "@/Data/getCategory";
+import { ShoppingCart, ShoppingCartIcon } from "lucide-react";
+import getProducts from "@/Data/getProdcut";
+import { ProductProps } from "@/types/ProductType";
 
 const getCombinedUserData = async () => {
   const { getUser } = getKindeServerSession();
@@ -54,7 +57,16 @@ const Header = async () => {
               </RegisterLink>
             </>
           ) : (
-            <UserProfile user={userData} />
+            <div className="flex items-center justify-center">
+              <div className="text-3xl relative mr-2 cursor-pointer hover:opacity-70 transition-opacity hover:text-blue-600 hover:scale-105 duration-300">
+                <ShoppingCart />
+
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-semibold rounded-full px-1">
+                  {(await getProducts()).length}
+                </span>
+              </div>
+              <UserProfile user={userData} />
+            </div>
           )}
         </div>
       </nav>

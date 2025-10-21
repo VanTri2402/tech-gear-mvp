@@ -13,7 +13,7 @@ model User {
   firstName String?
   lastName  String?
   role      Role      @default(USER)
-  wishlist  Product[] @relation("ProductToUser")
+  inCart  Product[] @relation("CartItems")
 }
 
 model Product {
@@ -26,7 +26,7 @@ model Product {
   updatedAt   DateTime @updatedAt
   categoryId  String
   category    Category @relation(fields: [categoryId], references: [id])
-  favoritedBy User[]   @relation("ProductToUser")
+  usersInCart User[]   @relation("CartItems")
 }
 
 model Category {
