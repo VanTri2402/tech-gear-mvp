@@ -53,7 +53,7 @@ export default async function HomePage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {products.map((product: ProductProps) => (
             <div key={product.id} className="group block">
-              <div className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300">
+              <div className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl min-h-[750px] transition-shadow duration-300">
                 {/* Image Container with Gradient Background */}
                 <div
                   className={`relative h-[360px] bg-gradient-to-br ${getCategoryGradient(
@@ -108,15 +108,6 @@ export default async function HomePage() {
                       <Button className="h-9 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-full text-sm">
                         Tìm hiểu thêm
                       </Button>
-                    </Link>
-
-                    <Link
-                      href={`/checkout/${product.id}`}
-                      className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center whitespace-nowrap"
-                      passHref
-                    >
-                      Mua
-                      <ChevronRight className="w-4 h-4 ml-1" />
                     </Link>
                   </div>
                 </div>

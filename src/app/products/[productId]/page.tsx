@@ -1,6 +1,6 @@
+import { CartButton } from "@/components/CartButton";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { WishlistButton } from "@/components/WishListButton";
 import prisma from "@/lib/db";
 import { ShoppingCart, Heart, Truck, Shield, RotateCcw } from "lucide-react";
 import Link from "next/link";
@@ -92,20 +92,9 @@ const ProductDetail = async ({ params }: { params: { productId: string } }) => {
 
             {/* Action Buttons */}
             <div className="space-y-4 pt-4">
-              <Button
-                size="lg"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-6 rounded-xl text-base"
-              >
-                <ShoppingCart className="mr-2 h-5 w-5" />
-                Add to Bag
-              </Button>
-
               <div className="flex gap-4">
                 {product.id && (
-                  <WishlistButton
-                    productId={product.id}
-                    initialIsInWishlist={false}
-                  />
+                  <CartButton productId={product.id} initialIsInCart={false} />
                 )}
               </div>
             </div>
