@@ -1,48 +1,49 @@
 // src/middleware.ts
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
-import prisma from "./lib/db";
 
 export default async function middleware(req: NextRequest) {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
+  const checkRoleUrl = new URL("/api/auth/check-role", req.url);
+  const cookieHeader = req.headers.get("cookie");
 
-  if (!user) {
-    // ... logic đăng nhập
-    const loginUrl = new URL("/api/auth/login", req.url);
-    loginUrl.searchParams.set("post_login_redirect_url", req.url);
-    return NextResponse.redirect(loginUrl);
-  }
+  const accessDeniedURL = new URL("/access-denied", req.url);
 
   try {
-    const dbUser = await prisma.user.findUnique({
-      where: { id: user.id },
-      select: { role: true },
+    const response = await fetch(checkRoleUrl.toString(), {
+      headers: {
+        ...(cookieHeader && { Cookie: cookieHeader }),
+      },
+      cache: "no-store",
     });
 
-    // --- THÊM DÒNG DEBUG Ở ĐÂY ---
-    console.log(
-      `[MIDDLEWARE DEBUG] User ID: ${user.id}, Role in DB: ${dbUser?.role}`
-    );
-    // ----------------------------
-
-    if (dbUser?.role !== "ADMIN") {
-      console.log(
-        "[MIDDLEWARE ACTION] Redirecting to home page because role is not ADMIN."
-      );
+    if (!response.ok) {
+      if (response.status === 401) {
+        const loginUrl = new URL("/api/auth/login", req.url);
+        loginUrl.searchParams.set(
+          "post_login_redirect_url",
+          req.nextUrl.pathname
+        );
+        return NextResponse.redirect(loginUrl);
+      }
       const homeURL = new URL("/", req.url);
       return NextResponse.redirect(homeURL);
     }
-  } catch (error) {
-    // ...
-  }
 
-  console.log("[MIDDLEWARE ACTION] Allowing access to /admin.");
-  return NextResponse.next();
+    const { isAdmin } = await response.json();
+
+    if (!isAdmin) {
+      return NextResponse.redirect(accessDeniedURL);
+    }
+
+    return NextResponse.next();
+  } catch (error) {
+    return NextResponse.redirect(accessDeniedURL);
+  } finally {
+    console.log(
+      `[Middleware] === Request End === Path: ${req.nextUrl.pathname}`
+    );
+  }
 }
 
 export const config = {
   matcher: ["/admin/:path*"],
 };
-
-export const runtime = "nodejs";
