@@ -98,30 +98,19 @@ export default async function CartPage() {
   // 5. Hiển thị danh sách sản phẩm và tổng tiền (Cập nhật layout)
   return (
     <div className="container mx-auto px-4 py-12 md:py-16 lg:py-20">
-      {" "}
-      {/* Tăng padding */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 md:mb-12">
         <h1 className="text-3xl lg:text-4xl font-bold">Your Shopping Cart</h1>
         <Badge variant="secondary" className="mt-2 md:mt-0 text-base px-3 py-1">
-          {" "}
-          {/* Thêm Badge số lượng */}
           {cartItems.length} {cartItems.length === 1 ? "item" : "items"}
         </Badge>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 xl:gap-16">
-        {" "}
-        {/* Tăng gap */}
-        {/* Danh sách sản phẩm (2/3 cột trên màn hình lớn) */}
         <div className="lg:col-span-2 space-y-6">
-          {" "}
-          {/* Tăng space-y */}
           {cartItems.map((item) => (
             <Card
               key={item.id}
               className="flex flex-col sm:flex-row items-start sm:items-center p-4 sm:p-6 shadow-sm hover:shadow-md transition-shadow duration-300"
             >
-              {" "}
-              {/* Responsive flex-direction */}
               <Link
                 href={`/products/${item.id}`}
                 className="block flex-shrink-0 w-full sm:w-28 sm:h-28 mb-4 sm:mb-0 sm:mr-6 rounded-md overflow-hidden bg-gray-100 relative aspect-square sm:aspect-auto"
@@ -130,8 +119,8 @@ export default async function CartPage() {
                   src={item.imageUrl || "/placeholder.jpg"}
                   alt={item.name}
                   layout="fill"
-                  objectFit="contain" // Contain để thấy rõ sản phẩm
-                  className="p-2" // Padding nhỏ cho ảnh contain
+                  objectFit="contain"
+                  className="p-2"
                 />
               </Link>
               <div className="flex-grow mb-4 sm:mb-0">
@@ -142,40 +131,26 @@ export default async function CartPage() {
                   {item.description || "No description available."}
                 </p>
                 <p className="text-lg font-bold text-gray-800">
-                  {" "}
-                  {/* Đổi màu/font weight */}
                   {formatCurrency(item.price)}
                 </p>
               </div>
               <div className="ml-auto flex-shrink-0 self-center sm:self-auto">
-                {" "}
-                {/* Canh nút xóa */}
-                {/* **Sử dụng component client mới** */}
                 <RemoveFromCartButton productId={item.id} />
               </div>
             </Card>
           ))}
         </div>
-        {/* Tóm tắt đơn hàng (1/3 cột trên màn hình lớn) */}
         <div className="lg:col-span-1">
           <Card className="sticky top-24 shadow-lg border border-gray-200">
-            {" "}
-            {/* Thêm border, tăng shadow */}
             <CardHeader className="border-b pb-4">
-              {" "}
-              {/* Thêm border dưới header */}
               <CardTitle className="text-xl">Order Summary</CardTitle>{" "}
-              {/* Tăng cỡ chữ */}
             </CardHeader>
             <CardContent className="pt-6 space-y-4">
-              {" "}
-              {/* Thêm pt-6 */}
               <div className="flex justify-between items-center text-gray-600">
                 <span>
                   Subtotal ({cartItems.length}{" "}
                   {cartItems.length === 1 ? "item" : "items"})
                 </span>{" "}
-                {/* Hiển thị item/items */}
                 <span className="font-medium">
                   {formatCurrency(totalPrice)}
                 </span>
@@ -183,28 +158,22 @@ export default async function CartPage() {
               <div className="flex justify-between items-center text-gray-600">
                 <span>Estimated Shipping</span>
                 <span className="font-medium text-green-600">Free</span>{" "}
-                {/* Màu xanh cho Free */}
               </div>
-              {/* Có thể thêm Estimated Tax */}
-              {/* <div className="flex justify-between items-center text-gray-600">
+              <div className="flex justify-between items-center text-gray-600">
                 <span>Estimated Tax</span>
-                <span className="font-medium">{formatCurrency(totalPrice * 0.08)}</span> // Ví dụ 8%
-              </div> */}
+                <span className="font-medium">
+                  {formatCurrency(totalPrice * 0.08)}
+                </span>
+                Ví dụ 8%
+              </div>
               <Separator className="my-4" /> {/* Tăng margin */}
               <div className="flex justify-between items-center text-xl font-bold">
-                {" "}
-                {/* Tăng font-bold */}
                 <span>Order Total</span>
                 <span>{formatCurrency(totalPrice)}</span>{" "}
-                {/* Giả sử chưa có tax/shipping */}
               </div>
             </CardContent>
             <CardFooter className="flex-col gap-4 pt-6 border-t">
-              {" "}
-              {/* Thêm border trên footer, flex-col, gap */}
               <Button size="lg" className="w-full text-lg py-6">
-                {" "}
-                {/* Tăng cỡ chữ, padding */}
                 Proceed to Checkout
               </Button>
               <Link href="/" className="w-full">
@@ -213,8 +182,6 @@ export default async function CartPage() {
                   variant="outline"
                   className="w-full text-lg py-6"
                 >
-                  {" "}
-                  {/* Nút Continue Shopping */}
                   Continue Shopping
                 </Button>
               </Link>

@@ -4,6 +4,7 @@ import IPhoneDetail from "@/components/CategoryDetail/IphoneDetail";
 import MacDetail from "@/components/CategoryDetail/MacDetail";
 import React from "react";
 import AirPodsDetail from "@/components/CategoryDetail/AirpodsDetail";
+import prisma from "@/lib/db";
 
 const DetailCategory = ({ params }: { params: { id: string } }) => {
   return (

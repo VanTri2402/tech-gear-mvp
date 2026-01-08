@@ -5,6 +5,21 @@ import prisma from "@/lib/db";
 import { ShoppingCart, Heart, Truck, Shield, RotateCcw } from "lucide-react";
 import Link from "next/link";
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { productId: string };
+}) {
+  const { productId } = params;
+  const product = await prisma.product.findUnique({
+    where: { id: productId },
+    include: { category: true },
+  });
+  return {
+    title: product?.name,
+    description: product?.description,
+  };
+}
 const ProductDetail = async ({ params }: { params: { productId: string } }) => {
   const { productId } = params;
   const product = await prisma.product.findUnique({
