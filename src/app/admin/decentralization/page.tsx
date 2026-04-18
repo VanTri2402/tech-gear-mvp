@@ -6,10 +6,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/shared/components/ui/table";
 import { UserActions } from "./components/UserActions";
 import { headers } from "next/headers"; // <-- BƯỚC 1: Import headers
-import { UserProps } from "@/types/UserType";
+import { UserProps } from "@/features/auth/types";
 
 async function getUsers() {
   // BƯỚC 2: Lấy headers từ request gốc

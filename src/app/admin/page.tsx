@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import {
   Table,
   TableBody,
@@ -6,12 +6,12 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/shared/components/ui/table";
 import { ProductForm } from "./components/ProductForm";
 import { ProductActions } from "./components/ProductActions";
-import { ProductProps } from "@/types/ProductType";
-import getProducts from "@/Data/getProdcut";
-import getCategories from "@/Data/getCategory";
+import { ProductProps } from "@/features/products/types";
+import getProducts from "@/features/products/queries/getProduct";
+import getCategories from "@/features/categories/queries/getCategory";
 
 const AdminPage = async () => {
   const products = await getProducts();

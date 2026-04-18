@@ -1,11 +1,11 @@
 // src/app/page.tsx
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import Link from "next/link";
-import { getUserRole } from "@/lib/admin-auth";
+import { getUserRole } from "@/features/auth/utils/admin-auth";
 import Image from "next/image";
-import { ProductProps } from "@/types/ProductType";
+import { ProductProps } from "@/features/products/types";
 import { ChevronRight } from "lucide-react";
-import getProducts from "@/Data/getProdcut";
+import getProducts from "@/features/products/queries/getProduct";
 
 // --- Hàm lấy dữ liệu (giữ nguyên) ---
 

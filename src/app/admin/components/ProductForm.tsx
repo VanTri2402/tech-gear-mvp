@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { DialogHeader } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Button } from "@/shared/components/ui/button";
+import { DialogHeader } from "@/shared/components/ui/dialog";
+import { Input } from "@/shared/components/ui/input";
+import { Label } from "@/shared/components/ui/label";
 import React from "react";
 import {
   Dialog,
@@ -11,12 +11,12 @@ import {
   DialogDescription,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@/shared/components/ui/dialog";
 import { useRouter } from "next/navigation";
-import { InputTemplate } from "@/components/InputTemplate";
-import { CategoryProps } from "@/types/CategoryType";
-import { ProductProps } from "@/types/ProductType";
-import { showToast } from "@/utils/toast";
+import { InputTemplate } from "@/shared/components/InputTemplate";
+import { CategoryProps } from "@/features/categories/types";
+import { ProductProps } from "@/features/products/types";
+import { showToast } from "@/shared/hooks/toast";
 
 export function ProductForm({
   categories,
@@ -96,8 +96,7 @@ export function ProductForm({
           <InputTemplate
             label="Price"
             name="price"
-            type="number"
-            defaultValue={initialData?.price ?? ""}
+            defaultValue={initialData?.price?.toString() ?? ""}
           />
           <InputTemplate
             label="Image URL"
@@ -115,7 +114,7 @@ export function ProductForm({
               name="categoryId"
               // Thêm một vài class của shadcn/ui/Tailwind để trông giống Input
               className="col-span-3 h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm"
-              defaultValue={initialData?.categoryId ?? "smartphones"}
+              defaultValue={initialData?.category ?? "smartphones"}
             >
               <option value="" disabled>
                 -- Chọn danh mục --

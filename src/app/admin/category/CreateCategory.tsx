@@ -1,7 +1,7 @@
 "use client"; // BẮT BUỘC: Vì sử dụng useState và useRouter
 
-import { Input } from "@/components/ui/input"; // Sử dụng Input trực tiếp
-import { Button } from "@/components/ui/button";
+import { Input } from "@/shared/components/ui/input"; // Sử dụng Input trực tiếp
+import { Button } from "@/shared/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -10,11 +10,11 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@/shared/components/ui/dialog";
 import { useRouter } from "next/navigation";
 import React, { useState, FormEvent } from "react";
-import { Label } from "@/components/ui/label";
-import { showToast } from "@/utils/toast";
+import { Label } from "@/shared/components/ui/label";
+import { showToast } from "@/shared/hooks/toast";
 
 // Đổi tên component cho rõ ràng hơn
 export function CreateCategoryDialog() {

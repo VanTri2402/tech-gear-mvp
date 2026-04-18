@@ -1,8 +1,8 @@
 // src/app/cart/RemoveFromCartButton.tsx
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { showToast } from "@/utils/toast";
+import { Button } from "@/shared/components/ui/button";
+import { showToast } from "@/shared/hooks/toast";
 import { Trash2, Loader2 } from "lucide-react"; // Import Loader2
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react"; // Import useTransition

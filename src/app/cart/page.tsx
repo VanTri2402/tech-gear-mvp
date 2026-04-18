@@ -3,8 +3,8 @@ import {
   getKindeServerSession,
   LoginLink,
 } from "@kinde-oss/kinde-auth-nextjs/server";
-import prisma from "@/lib/db";
-import { Button } from "@/components/ui/button";
+import prisma from "@/lib/prisma";
+import { Button } from "@/shared/components/ui/button";
 import {
   Card,
   CardContent,
@@ -12,12 +12,12 @@ import {
   CardHeader,
   CardTitle,
   CardDescription, // Import CardDescription
-} from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+} from "@/shared/components/ui/card";
+import { Separator } from "@/shared/components/ui/separator";
 import { ShoppingCart } from "lucide-react"; // Bỏ Trash2 vì đã dùng trong component client
 import Image from "next/image";
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge"; // Import Badge
+import { Badge } from "@/shared/components/ui/badge"; // Import Badge
 import { RemoveFromCartButton } from "./RemoveCartButton";
 // Định dạng tiền tệ USD (giữ nguyên)
 const formatCurrency = (amount: number) => {

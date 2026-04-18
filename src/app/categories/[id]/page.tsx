@@ -1,10 +1,10 @@
-import WatchDetail from "@/components/CategoryDetail/WatchDeatail";
-import IPadDetail from "@/components/CategoryDetail/IpadDetail";
-import IPhoneDetail from "@/components/CategoryDetail/IphoneDetail";
-import MacDetail from "@/components/CategoryDetail/MacDetail";
+import WatchDetail from "@/features/categories/components/WatchDeatail";
+import IPadDetail from "@/features/categories/components/IpadDetail";
+import IPhoneDetail from "@/features/categories/components/IphoneDetail";
+import MacDetail from "@/features/categories/components/MacDetail";
 import React from "react";
-import AirPodsDetail from "@/components/CategoryDetail/AirpodsDetail";
-import prisma from "@/lib/db";
+import AirPodsDetail from "@/features/categories/components/AirpodsDetail";
+import prisma from "@/lib/prisma";
 
 const DetailCategory = ({ params }: { params: { id: string } }) => {
   return (

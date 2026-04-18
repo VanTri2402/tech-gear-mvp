@@ -1,5 +1,5 @@
 // src/app/not-found.tsx
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { FileSearch } from "lucide-react"; // Icon khác cho 404
 import Link from "next/link";
 

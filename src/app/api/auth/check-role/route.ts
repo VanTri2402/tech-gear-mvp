@@ -1,7 +1,7 @@
 // src/app/api/auth/check-role/route.ts
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { NextResponse } from "next/server";
-import prisma from "@/lib/db"; // Đảm bảo đường dẫn import prisma đúng
+import prisma from "@/lib/prisma"; // Đảm bảo đường dẫn import prisma đúng
 
 // API route này sẽ chạy trên Node.js runtime mặc định
 export async function GET(request: Request) {

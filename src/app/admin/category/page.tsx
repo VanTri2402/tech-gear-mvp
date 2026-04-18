@@ -6,12 +6,12 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/shared/components/ui/table";
 import React from "react";
 import CategoryActions from "./CategoryActions";
 import { headers } from "next/headers"; // Import headers
 import { CreateCategoryDialog } from "./CreateCategory";
-import { CategoryProps } from "@/types/CategoryType";
+import { CategoryProps } from "@/features/categories/types";
 
 async function fetchCategories() {
   const headerList = headers();

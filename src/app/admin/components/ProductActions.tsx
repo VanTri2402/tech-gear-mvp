@@ -8,17 +8,17 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
+} from "@/shared/components/ui/alert-dialog";
+import { Button } from "@/shared/components/ui/button";
 import {
   AlertDialogAction,
   AlertDialogCancel,
 } from "@radix-ui/react-alert-dialog";
 import { useRouter } from "next/navigation";
 import { ProductForm } from "./ProductForm";
-import { ProductProps } from "@/types/ProductType";
-import { CategoryProps } from "@/types/CategoryType";
-import { showToast } from "@/utils/toast";
+import { ProductProps } from "@/features/products/types";
+import { CategoryProps } from "@/features/categories/types";
+import { showToast } from "@/shared/hooks/toast";
 
 interface ProductActionsProps {
   product: ProductProps;

@@ -1,5 +1,5 @@
-import { checkAdminAuth } from "@/lib/admin-auth";
-import prisma from "@/lib/db";
+import { checkAdminAuth } from "@/features/auth/utils/admin-auth";
+import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 export async function GET() {
   try {

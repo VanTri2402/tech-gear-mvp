@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { Toaster } from "@/components/ui/sonner";
+import Header from "@/shared/components/Header";
+import Footer from "@/shared/components/Footer";
+import { Toaster } from "@/shared/components/ui/sonner";
 
 const inter = Inter({
   variable: "--font-sans", // Đặt tên biến CSS là --font-sans

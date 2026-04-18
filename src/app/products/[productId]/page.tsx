@@ -1,7 +1,7 @@
-import { CartButton } from "@/components/CartButton";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import prisma from "@/lib/db";
+import { CartButton } from "@/features/cart/components/CartButton";
+import { Button } from "@/shared/components/ui/button";
+import { Separator } from "@/shared/components/ui/separator";
+import prisma from "@/lib/prisma";
 import { ShoppingCart, Heart, Truck, Shield, RotateCcw } from "lucide-react";
 import Link from "next/link";
 
