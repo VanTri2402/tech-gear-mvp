@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import { menuIPadInfo } from "@/features/categories/constants/IpadInfo"; // Đảm bảo đường dẫn đúng
 import { Separator } from "@/shared/components/ui/separator";
@@ -126,11 +127,11 @@ const IPadDetail = async ({ params }: { params: { id: string } }) => {
                 <div className="bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
                   <div
                     className={`relative h-[420px] bg-gradient-to-br ${getProductGradient(
-                      product.name
+                      product.name,
                     )} flex items-center justify-center`}
                   >
                     <div className="relative w-full h-full">
-                      <img
+                      <Image fill 
                         src={product.imageUrl || "/placeholder.jpg"}
                         alt={product.name}
                         className="absolute inset-0 w-full h-full object-contain p-8 transform group-hover:scale-105 transition-transform duration-500" // object-contain và padding
@@ -198,7 +199,7 @@ const IPadDetail = async ({ params }: { params: { id: string } }) => {
                   key={index}
                   className="relative group flex-shrink-0 w-[340px] md:w-[405px] h-[580px] md:h-[700px] rounded-[28px] overflow-hidden snap-center flex flex-col"
                 >
-                  <img
+                  <Image fill 
                     src={card.imageUrl || "/placeholder-ipad.jpg"} // Sử dụng ảnh đã cập nhật
                     alt={card.title}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 z-0"
@@ -239,7 +240,7 @@ const IPadDetail = async ({ params }: { params: { id: string } }) => {
                 key={index}
                 className="relative rounded-[28px] overflow-hidden min-h-[400px] md:min-h-[500px] group hover:shadow-xl transition-shadow duration-300 flex flex-col"
               >
-                <img
+                <Image fill 
                   src={card.imageUrl} // Sử dụng ảnh đã cập nhật
                   alt={card.title}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 z-0"
@@ -290,9 +291,9 @@ const IPadDetail = async ({ params }: { params: { id: string } }) => {
                   className="relative group flex-shrink-0 w-[300px] sm:w-[344px] min-h-[400px] rounded-2xl overflow-hidden snap-center flex flex-col border border-gray-100 shadow-sm"
                 >
                   {/* Ảnh nền */}
-                  {card.imageUrl && ( // Kiểm tra nếu có imageUrl
-                    <img
-                      src={card.imageUrl}
+                  {card?.imageUrl && ( // Kiểm tra nếu có imageUrl
+                    <Image fill 
+                      src={card?.imageUrl}
                       alt={card.title}
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 z-0"
                       loading="lazy"
@@ -305,7 +306,7 @@ const IPadDetail = async ({ params }: { params: { id: string } }) => {
                       <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 mb-6 bg-white/10 rounded-full">
                         {React.cloneElement(
                           iconMap[card.icon] as React.ReactElement,
-                          { className: "w-10 h-10 md:w-12 md:h-12" }
+                          { className: "w-10 h-10 md:w-12 md:h-12" },
                         )}
                       </div>
                     ) : (
@@ -339,7 +340,7 @@ const IPadDetail = async ({ params }: { params: { id: string } }) => {
                 key={index}
                 className="relative group rounded-[28px] overflow-hidden min-h-[400px] hover:shadow-2xl transition-shadow duration-300 flex flex-col"
               >
-                <img
+                <Image fill 
                   src={card.imageUrl} // Sử dụng ảnh đã cập nhật
                   alt={card.title}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 z-0"
@@ -388,7 +389,7 @@ const IPadDetail = async ({ params }: { params: { id: string } }) => {
                 key={index}
                 className="relative group rounded-[28px] overflow-hidden min-h-[400px] md:min-h-[500px] hover:shadow-xl transition-shadow duration-300 flex flex-col"
               >
-                <img
+                <Image fill 
                   src={card.imageUrl} // Sử dụng ảnh đã cập nhật
                   alt={card.title}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 z-0"

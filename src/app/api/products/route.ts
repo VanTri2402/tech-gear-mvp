@@ -2,6 +2,7 @@ import { checkAdminAuth } from "@/features/auth/utils/admin-auth";
 import prisma from "@/lib/prisma";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { NextResponse } from "next/server";
+import { revalidateTag } from "next/cache";
 
 export async function GET() {
   const products = await prisma.product.findMany({
@@ -21,6 +22,7 @@ export async function POST(request: Request) {
     const product = await prisma.product.create({
       data: { name, description, price, imageUrl, categoryId },
     });
+    revalidateTag("products");
     return NextResponse.json(product);
   } catch (error: any) {
     // Bắt các lỗi đã "ném" ra từ checkAdminAuth

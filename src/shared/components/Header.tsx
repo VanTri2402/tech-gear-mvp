@@ -37,7 +37,9 @@ const getUserDataWithCart = async () => {
     ...user, // id, email, given_name, family_name, picture từ Kinde
     role: dbUserWithCart.role,
     inCart: dbUserWithCart.inCart, // Mảng sản phẩm trong giỏ hàng (chỉ có id)
-  };
+    firstName: dbUserWithCart.firstName,
+    lastName: dbUserWithCart.lastName,
+  } as any;
 };
 
 const Header = async () => {
@@ -50,18 +52,26 @@ const Header = async () => {
   // Logic upsert user vào DB khi họ đăng nhập (giữ nguyên nếu có)
   const { getUser } = getKindeServerSession();
   const user = await getUser();
-  if (user) {
-    await prisma.user.upsert({
-      where: { id: user.id },
-      update: {},
-      create: {
-        id: user.id,
-        email: user.email ?? "", // Cung cấp giá trị mặc định nếu email là null
-        firstName: user.given_name,
-        lastName: user.family_name,
-        // Role mặc định là USER khi tạo mới
-      },
-    });
+  if (user && user.email) {
+    try {
+      await prisma.user.upsert({
+        where: { email: user.email }, // Kinde user.email is always unique
+        update: {
+          // If the user already exists, Kinde might have provided a new ID or we update their names
+          id: user.id,
+          firstName: user.given_name,
+          lastName: user.family_name,
+        },
+        create: {
+          id: user.id,
+          email: user.email,
+          firstName: user.given_name,
+          lastName: user.family_name,
+        },
+      });
+    } catch (error) {
+      console.error("Failed to sync user from Kinde:", error);
+    }
   }
   // --- Kết thúc logic upsert ---
 

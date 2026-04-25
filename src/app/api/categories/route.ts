@@ -1,6 +1,7 @@
 import prisma from "@/lib/prisma";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { NextResponse } from "next/server";
+import { revalidateTag } from "next/cache";
 export async function GET() {
   try {
     const categories = await prisma.category.findMany({
@@ -42,6 +43,7 @@ export async function POST(request: Request) {
         name,
       },
     });
+    revalidateTag("categories");
     return NextResponse.json(category);
   } catch (error) {
     console.log(error);

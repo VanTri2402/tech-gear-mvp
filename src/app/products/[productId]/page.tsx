@@ -4,6 +4,7 @@ import { Separator } from "@/shared/components/ui/separator";
 import prisma from "@/lib/prisma";
 import { ShoppingCart, Heart, Truck, Shield, RotateCcw } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export async function generateMetadata({
   params,
@@ -53,10 +54,11 @@ const ProductDetail = async ({ params }: { params: { productId: string } }) => {
           <div className="sticky top-8">
             {/* Main Image */}
             <div className="relative aspect-square bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl overflow-hidden">
-              <img
+              <Image
                 src={product.imageUrl || "/placeholder.jpg"}
                 alt={product.name}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                fill
+                className="absolute inset-0 object-cover transition-transform duration-700 hover:scale-105"
                 loading="lazy"
               />
             </div>

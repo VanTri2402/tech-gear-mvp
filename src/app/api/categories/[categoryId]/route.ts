@@ -1,5 +1,6 @@
 import { checkAdminAuth } from "@/features/auth/utils/admin-auth";
 import { NextRequest, NextResponse } from "next/server";
+import { revalidateTag } from "next/cache";
 import prisma from "@/lib/prisma";
 export async function DELETE({ params }: { params: { categoryId: string } }) {
   try {
@@ -9,6 +10,7 @@ export async function DELETE({ params }: { params: { categoryId: string } }) {
     await prisma?.category.delete({
       where: { id: categoryId },
     });
+    revalidateTag("categories");
     return new NextResponse("Category deleted successfully!", { status: 200 });
   } catch (error) {
     return new NextResponse("Failed to delete category", { status: 500 });
@@ -33,6 +35,7 @@ export async function PATCH(
       where: { id: categoryId },
       data: { name },
     });
+    revalidateTag("categories");
     return new NextResponse("Category updated successfully!", { status: 200 });
   } catch (error) {
     return new NextResponse("Failed to update category", { status: 500 });

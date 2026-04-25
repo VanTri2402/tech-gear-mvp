@@ -89,7 +89,7 @@ const WatchDetail = async ({ params }: { params: { id: string } }) => {
                     >
                       <div className="relative w-full h-full">
                         {/* Sử dụng thẻ <img> thường */}
-                        <img
+                        <Image fill 
                           src={product.imageUrl || "/placeholder.jpg"}
                           alt={product.name}
                           className="absolute inset-0 w-full h-full object-center object-cover transform group-hover:scale-105 transition-transform duration-500"
@@ -154,7 +154,7 @@ const WatchDetail = async ({ params }: { params: { id: string } }) => {
                   key={index}
                   className="relative group flex-shrink-0 w-[340px] md:w-[405px] h-[580px] md:h-[700px] rounded-[28px] overflow-hidden snap-center flex flex-col" // Thêm flex flex-col
                 >
-                  <img
+                  <Image fill 
                     src={card.imageUrl}
                     alt={card.title}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 z-0"
@@ -190,7 +190,7 @@ const WatchDetail = async ({ params }: { params: { id: string } }) => {
                 key={index}
                 className="relative rounded-[28px] overflow-hidden min-h-[400px] md:min-h-[500px] group hover:shadow-xl transition-shadow duration-300 flex flex-col"
               >
-                <img
+                <Image fill 
                   src={card.imageUrl} // Dùng URL ảnh đã thay thế
                   alt={card.title}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 z-0"
@@ -236,7 +236,7 @@ const WatchDetail = async ({ params }: { params: { id: string } }) => {
                 key={index}
                 className="relative rounded-[28px] overflow-hidden min-h-[380px] group hover:shadow-xl transition-shadow duration-300 flex flex-col"
               >
-                <img
+                <Image fill 
                   src={card.imageUrl} // Dùng URL ảnh đã thay thế
                   alt={card.title}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 z-0"
@@ -323,7 +323,7 @@ const WatchDetail = async ({ params }: { params: { id: string } }) => {
                 key={index}
                 className="relative rounded-[28px] overflow-hidden min-h-[420px] group hover:shadow-2xl transition-shadow duration-300 flex flex-col"
               >
-                <img
+                <Image fill 
                   src={card.imageUrl} // Dùng URL ảnh đã thay thế
                   alt={card.title}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 z-0"
@@ -370,7 +370,7 @@ const WatchDetail = async ({ params }: { params: { id: string } }) => {
                 className="relative rounded-[28px] overflow-hidden min-h-[380px] group hover:shadow-xl transition-shadow duration-300 flex flex-col"
                 style={{ backgroundColor: "white" }} // Thêm nền trắng nếu cần
               >
-                <img
+                <Image fill 
                   src={card.imageUrl} // Dùng URL ảnh đã thay thế
                   alt={card.title}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 z-0"
@@ -416,7 +416,7 @@ const WatchDetail = async ({ params }: { params: { id: string } }) => {
                 key={index}
                 className="relative rounded-[28px] overflow-hidden min-h-[400px] md:min-h-[500px] group hover:shadow-xl transition-shadow duration-300 flex flex-col"
               >
-                <img
+                <Image fill 
                   src={card.imageUrl} // Dùng URL ảnh đã thay thế
                   alt={card.title}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 z-0"

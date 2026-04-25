@@ -1,11 +1,21 @@
-import { NextResponse } from "next/server";
+import prisma from "@/lib/prisma";
+import { unstable_cache } from "next/cache";
 
-export default async function getCategories() {
-  const res = await fetch(`${process.env.KINDE_SITE_URL}/api/categories`, {
-    cache: "no-store",
-  });
-  if (!res.ok) {
-    return NextResponse.error();
+export const getCategories = unstable_cache(
+  async () => {
+    return prisma.category.findMany({
+      include: {
+        _count: {
+          select: { products: true },
+        },
+      },
+    });
+  },
+  ["categories"],
+  {
+    revalidate: 60,
+    tags: ["categories"],
   }
-  return res.json();
-}
+);
+
+export default getCategories;

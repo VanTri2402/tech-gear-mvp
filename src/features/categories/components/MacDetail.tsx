@@ -105,7 +105,7 @@ const MacDetail = async ({ params }: { params: { id: string } }) => {
                     className="group relative flex-shrink-0 w-[340px] md:w-[405px] h-[580px] md:h-[700px] rounded-[28px] overflow-hidden bg-[#F5F5F7]"
                   >
                     <div className="relative w-full h-full">
-                      <img
+                      <Image fill 
                         src={card.imageUrl || "/placeholder-mac.jpg"} // Cần thay bằng URL ảnh phù hợp
                         alt={card.title}
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -147,7 +147,7 @@ const MacDetail = async ({ params }: { params: { id: string } }) => {
                 className="relative rounded-[28px] overflow-hidden min-h-[400px] md:min-h-[500px] group hover:shadow-xl transition-shadow duration-300 flex" // Giữ flex, không cần flex-col ở đây
               >
                 {/* Ảnh nền */}
-                <img
+                <Image fill 
                   src={card.imageUrl}
                   alt={card.title}
                   // Ảnh nằm tuyệt đối, lấp đầy container, z-index thấp nhất TRONG card này
@@ -234,7 +234,7 @@ const MacDetail = async ({ params }: { params: { id: string } }) => {
                 key={index}
                 className="group relative rounded-[28px] overflow-hidden bg-[#F5F5F7] text-[#f5f5f7] min-h-[400px] md:min-h-[500px] flex flex-col justify-end p-8 md:p-12 hover:shadow-2xl transition-shadow duration-300"
               >
-                <img
+                <Image fill 
                   src={card.imageUrl}
                   alt={card.title}
                   // Ảnh nằm tuyệt đối, lấp đầy container, z-index thấp nhất TRONG card này

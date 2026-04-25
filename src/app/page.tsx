@@ -60,12 +60,12 @@ export default async function HomePage() {
                     product.category
                   )} flex items-center justify-center`}
                 >
-                  <img
+                  <Image
                     src={product.imageUrl || "/placeholder.jpg"}
                     alt={product.name}
-                    className="absolute inset-0 w-full h-[350px] object-cover object-center transform scale-[1.25] group-hover:scale-[1.35] transition-transform duration-700 z-10" // Sử dụng absolute positioning
+                    fill
+                    className="absolute inset-0 object-cover object-center transform scale-[1.25] group-hover:scale-[1.35] transition-transform duration-700 z-10"
                     loading="lazy"
-                    // quality và priority bị loại bỏ
                   />
                 </div>
 

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import {
   Headphones,
@@ -72,7 +73,7 @@ const AirPodsDetail = async ({ params }: { params: { id: string } }) => {
         </div>
 
         <div className="relative w-full rounded-[28px] overflow-hidden mb-12">
-          <img
+          <Image fill 
             src={menuAirPodsInfo[0].imageUrl}
             alt="AirPods Hero"
             className="w-full h-[800px] object-cover object-center"
@@ -98,7 +99,7 @@ const AirPodsDetail = async ({ params }: { params: { id: string } }) => {
               >
                 <div className="w-full md:w-1/2">
                   <div className="relative rounded-[28px] overflow-hidden aspect-[4/3]">
-                    <img
+                    <Image fill 
                       src={feature.imageUrl}
                       alt={feature.title}
                       className="w-full h-full object-cover"
@@ -252,7 +253,7 @@ const AirPodsDetail = async ({ params }: { params: { id: string } }) => {
               >
                 <div className="w-full md:w-1/2">
                   <div className="relative rounded-[28px] overflow-hidden aspect-[4/3]">
-                    <img
+                    <Image fill 
                       src={useCase.imageUrl}
                       alt={useCase.title}
                       className="w-full h-full object-cover"
